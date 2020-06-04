@@ -12,12 +12,14 @@ self.document = {
   createEvent: type => new CustomEvent(type),
 };
 
-const {
-  loadMeshStreamingWithURLAsync,
-  Mesh,
-} = require('@0x/mesh-browser-lite');
+const loadMesh = async () => {
+  const {
+    loadMeshStreamingWithURLAsync,
+    Mesh,
+  } = import(/* webpackChunkName: 'mesh-browser-lite' */ '@0x/mesh-browser-lite');
 
-const loadMesh = async () => loadMeshStreamingWithURLAsync('zerox.wasm');
+  await loadMeshStreamingWithURLAsync('zerox.wasm');
+}
 Comlink.expose({
   loadMesh: () =>
     new Promise((resolve, reject) =>

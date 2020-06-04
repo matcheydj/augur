@@ -25,7 +25,7 @@
   "homepage": "https://github.com/AugurProject/augur-lite#readme",
   "dependencies": {
     "async": "3.1.0",
-    "ethers": "4.0.37"
+    "ethers": "4.0.47"
   },
   "devDependencies": {
     "@types/async": "3.0.1",

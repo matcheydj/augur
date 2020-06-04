@@ -9,7 +9,7 @@ import {
 } from 'modules/common/constants';
 import { MarketData } from 'modules/types';
 import { INVALID_OUTCOME } from 'modules/create-market/constants';
-import { MarketInfo } from '@augurproject/sdk/src/state/getter/Markets';
+import type { MarketInfo } from '@augurproject/sdk';
 
 const getOutcomeName = (
   market: MarketData | MarketInfo,

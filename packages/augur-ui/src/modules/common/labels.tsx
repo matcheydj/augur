@@ -43,7 +43,7 @@ import {
 import { ViewTransactionDetailsButton } from 'modules/common/buttons';
 import { formatNumber, formatBlank, formatGasCostToEther, formatAttoEth } from 'utils/format-number';
 import { DateFormattedObject, FormattedNumber, SizeTypes, MarketData } from 'modules/types';
-import { Getters, TXEventName } from '@augurproject/sdk';
+import type { Getters, TXEventName } from '@augurproject/sdk';
 import {
   DISMISSABLE_NOTICE_BUTTON_TYPES,
   DismissableNotice,

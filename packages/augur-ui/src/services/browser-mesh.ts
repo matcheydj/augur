@@ -1,16 +1,16 @@
-import {
+import type {
   Config,
   ContractAddresses as ZeroXContractAddresses,
-  loadMeshStreamingWithURLAsync,
-  Mesh,
 } from '@0x/mesh-browser-lite';
-import { OrderEvent } from '@0x/mesh-rpc-client';
-import {
+
+import type {
   ContractAddresses,
-  NetworkId,
   SDKConfiguration,
 } from '@augurproject/artifacts';
-import { SubscriptionEventName, ZeroX } from '@augurproject/sdk';
+
+import type { SubscriptionEventName, ZeroX } from '@augurproject/sdk';
+
+import { NetworkId } from "@augurproject/utils";
 import { retry } from 'async';
 import * as Comlink from 'comlink';
 import { SupportedProvider } from 'ethereum-types';
@@ -79,23 +79,25 @@ function createBrowserMeshRestartFunction(
     console.log('Restarting Mesh Sync');
     zeroX.client.events.emit(SubscriptionEventName.ZeroXStatusError, {error: err});
 
-    // Passing `true` as the last parameter to make sure the config doesn't include custom addresses on retry
-    const mesh = new Mesh(
-      createBrowserMeshConfig(
-        meshConfig.ethereumRPCURL,
-        web3Provider,
-        meshConfig.ethereumChainID,
-        sdkConfig.addresses,
-        meshConfig.verbosity,
-        meshConfig.useBootstrapList,
-        meshConfig.bootstrapList,
-        true
-      )
-    );
-    mesh.onError(createBrowserMeshRestartFunction(meshConfig, web3Provider, zeroX, sdkConfig));
-    mesh.startAsync().then(() => {
-      zeroX.mesh = mesh;
-    })
+    import(/* webpackChunkName: 'mesh-browser-lite' */ '@0x/mesh-browser-lite').then(({Mesh}) => {
+      // Passing `true` as the last parameter to make sure the config doesn't include custom addresses on retry
+      const mesh = new Mesh(
+        createBrowserMeshConfig(
+          meshConfig.ethereumRPCURL,
+          web3Provider,
+          meshConfig.ethereumChainID,
+          sdkConfig.addresses,
+          meshConfig.verbosity,
+          meshConfig.useBootstrapList,
+          meshConfig.bootstrapList,
+          true
+        )
+      );
+      mesh.onError(createBrowserMeshRestartFunction(meshConfig, web3Provider, zeroX, sdkConfig));
+      mesh.startAsync().then(() => {
+        zeroX.mesh = mesh;
+      })
+    });
   };
 }
 
@@ -194,7 +196,7 @@ export async function createBrowserMesh(
 
     zeroX.client.events.on(SubscriptionEventName.ZeroXStatusSynced, cb);
 
-    mesh.onError(createBrowserMeshRestartFunction(meshConfig, web3Provider, zeroX, config));
+    //mesh.onError(createBrowserMeshRestartFunction(meshConfig, web3Provider, zeroX, config));
     await mesh.startAsync();
     zeroX.mesh = mesh;
   } catch(error) {

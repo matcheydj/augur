@@ -46,7 +46,7 @@ import {
   hasAutoFillCategory,
 } from 'modules/create-market/get-template';
 import { YesNoMarketIcon, CategoricalMarketIcon, ScalarMarketIcon } from 'modules/common/icons';
-import { TemplateInputType } from '@augurproject/artifacts/src';
+import { TemplateInputType } from '@augurproject/artifacts';
 
 interface FormDetailsProps {
   newMarket: NewMarket;

@@ -11,7 +11,7 @@ import InvalidLabel from 'modules/common/containers/labels';
 import { CancelTextButton } from 'modules/common/buttons';
 import MarketOutcomeTradingIndicator from 'modules/market/containers/market-outcome-trading-indicator';
 import { DateFormattedObject } from 'modules/types';
-import { TXEventName } from '@augurproject/sdk/src';
+import type { TXEventName } from '@augurproject/sdk';
 import { XIcon } from 'modules/common/icons';
 
 const { COLUMN_TYPES } = constants;

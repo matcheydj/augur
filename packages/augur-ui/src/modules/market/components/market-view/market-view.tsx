@@ -53,7 +53,7 @@ import { createBigNumber } from 'utils/create-big-number';
 import makePath from 'modules/routes/helpers/make-path';
 import { MARKETS } from 'modules/routes/constants/views';
 import { formatOrderBook } from 'modules/create-market/helpers/format-order-book';
-import { Getters, HotLoadMarketInfo, TXEventName } from '@augurproject/sdk';
+import type { Getters, HotLoadMarketInfo, TXEventName } from '@augurproject/sdk';
 import { HelmetTag } from 'modules/seo/helmet-tag';
 import { MARKET_VIEW_HEAD_TAGS } from 'modules/seo/helmet-configs';
 import { hotloadMarket } from 'modules/markets/actions/load-markets';

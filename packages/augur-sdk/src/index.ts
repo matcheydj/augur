@@ -10,7 +10,6 @@ export * from './api/WarpSync';
 export * from '@augurproject/types';
 export { Provider } from './ethereum/Provider';
 export * from './utils';
-export * from './constants';
 export * from './state';
 export * from './subscriptions';
 export { ContractEvents } from './api/ContractEvents';
@@ -18,10 +17,7 @@ export { ContractEvents } from './api/ContractEvents';
 import * as Connectors from './connector';
 import * as Events from './events';
 
-export {
-  Connectors,
-  Events
-};
+export { Connectors, Events };
 
 export { IsJsonRpcRequest } from './state/IsJsonRpcRequest';
 export { JsonRpcRequest, JsonRpcResponse } from './state/getter/types';

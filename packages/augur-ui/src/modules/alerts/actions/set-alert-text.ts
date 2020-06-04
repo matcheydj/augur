@@ -13,7 +13,6 @@ import {
 } from 'utils/format-number';
 import {
   calculatePayoutNumeratorsValue,
-  TXEventName,
   convertOnChainAmountToDisplayAmount,
   convertOnChainPriceToDisplayPrice,
   convertPayoutNumeratorsToStrings,
@@ -21,7 +20,10 @@ import {
   convertDisplayValuetoAttoValue,
   numTicksToTickSize,
   convertAttoValueToDisplayValue,
-} from '@augurproject/sdk';
+} from '@augurproject/sdk-lite';
+import type {
+  TXEventName
+} from '@augurproject/sdk'
 import {
   BUY,
   SELL,

@@ -27,5 +27,7 @@
     },
     {
       "path": "../ethersjs-provider"
+    },{
+      "path": "../augur-sdk-lite"
     }]
 }

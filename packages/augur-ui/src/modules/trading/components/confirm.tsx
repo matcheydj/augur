@@ -39,7 +39,7 @@ import { LinearPropertyLabel, EthReserveNotice, TransactionFeeLabelToolTip, EthR
 import { Trade } from 'modules/types';
 import { ExternalLinkButton, ProcessingButton } from 'modules/common/buttons';
 import { ethToDaiFromAttoRate } from 'modules/app/actions/get-ethToDai-rate';
-import { TXEventName } from '@augurproject/sdk/src';
+import type { TXEventName } from '@augurproject/sdk';
 
 interface MessageButton {
   action: Function;

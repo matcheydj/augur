@@ -1,20 +1,24 @@
+import { SDKConfiguration } from '@augurproject/artifacts';
+import { SubscriptionEventName } from '@augurproject/sdk-lite';
 import express from 'express';
 import http from 'http';
 import https from 'https';
 import WebSocket from 'ws';
 
 import { augurEmitter } from '../events';
-import { API } from './getter/API';
-import { AddressFormatReviver } from './AddressFormatReviver';
-import { IsJsonRpcRequest } from './IsJsonRpcRequest';
-import { JsonRpcRequest } from './getter/types';
-import { MakeJsonRpcError, JsonRpcErrorCode } from './MakeJsonRpcError';
-import { MakeJsonRpcResponse } from './MakeJsonRpcResponse';
 import { Subscriptions } from '../subscriptions';
-import { SubscriptionEventName } from '../constants';
-import { SDKConfiguration } from '@augurproject/artifacts';
+import { AddressFormatReviver } from './AddressFormatReviver';
+import { API } from './getter/API';
+import { JsonRpcRequest } from './getter/types';
+import { IsJsonRpcRequest } from './IsJsonRpcRequest';
+import { JsonRpcErrorCode, MakeJsonRpcError } from './MakeJsonRpcError';
+import { MakeJsonRpcResponse } from './MakeJsonRpcResponse';
 
-export function runWsServer(api: API, app: express.Application, config: SDKConfiguration): WebSocket.Server {
+export function runWsServer(
+  api: API,
+  app: express.Application,
+  config: SDKConfiguration
+): WebSocket.Server {
   const { wsPort: port } = config.server;
   const server = http.createServer(app).listen(port, () => {
     console.log(`WS listening on ${port}`);
@@ -24,7 +28,11 @@ export function runWsServer(api: API, app: express.Application, config: SDKConfi
   return wsServer;
 }
 
-export function runWssServer(api: API, app: express.Application, config: SDKConfiguration): WebSocket.Server {
+export function runWssServer(
+  api: API,
+  app: express.Application,
+  config: SDKConfiguration
+): WebSocket.Server {
   const { wssPort: port } = config.server;
   const server = https.createServer(app).listen(port, () => {
     console.log(`WSS listening on ${port}`);
@@ -32,7 +40,7 @@ export function runWssServer(api: API, app: express.Application, config: SDKConf
 
   const wssServer = new WebSocket.Server({ server });
   setupServer(wssServer, api);
-  return wssServer
+  return wssServer;
 }
 
 function setupServer(server: WebSocket.Server, api: API) {
@@ -49,7 +57,15 @@ function setupServer(server: WebSocket.Server, api: API) {
           return console.error('bad json rpc message received:', message);
         }
       } catch (exc) {
-        return safeSend(websocket, MakeJsonRpcError('-1', JsonRpcErrorCode.ParseError, 'Bad JSON RPC Message Received', { originalText: data as string }));
+        return safeSend(
+          websocket,
+          MakeJsonRpcError(
+            '-1',
+            JsonRpcErrorCode.ParseError,
+            'Bad JSON RPC Message Received',
+            { originalText: data as string }
+          )
+        );
       }
 
       try {
@@ -57,36 +73,80 @@ function setupServer(server: WebSocket.Server, api: API) {
           const eventName: string = message.params.shift();
 
           try {
-            const subscription: string = subscriptions.subscribe(eventName, (data: {}): void => {
-              safeSend(websocket, MakeJsonRpcResponse(null, { subscription, result: data }));
-            });
-            safeSend(websocket, MakeJsonRpcResponse(message.id, { subscription }));
+            const subscription: string = subscriptions.subscribe(
+              eventName,
+              (data: {}): void => {
+                safeSend(
+                  websocket,
+                  MakeJsonRpcResponse(null, { subscription, result: data })
+                );
+              }
+            );
+            safeSend(
+              websocket,
+              MakeJsonRpcResponse(message.id, { subscription })
+            );
           } catch (exc) {
-            safeSend(websocket, MakeJsonRpcError(message.id, JsonRpcErrorCode.MethodNotFound, exc.toString(), false));
+            safeSend(
+              websocket,
+              MakeJsonRpcError(
+                message.id,
+                JsonRpcErrorCode.MethodNotFound,
+                exc.toString(),
+                false
+              )
+            );
           }
 
-          if (eventName === SubscriptionEventName.SDKReady && api.augur.sdkReady) {
+          if (
+            eventName === SubscriptionEventName.SDKReady &&
+            api.augur.sdkReady
+          ) {
             console.log('immediately sending SDKReady event to new connection');
-            safeSend(websocket, JSON.stringify({
-              eventName: SubscriptionEventName.SDKReady,
-              result: [ 'ignoreme' ],
-            }));
+            safeSend(
+              websocket,
+              JSON.stringify({
+                eventName: SubscriptionEventName.SDKReady,
+                result: ['ignoreme'],
+              })
+            );
           }
-
         } else if (message.method === 'unsubscribe') {
           const subscription: string = message.params.shift();
           subscriptions.unsubscribe(subscription);
           safeSend(websocket, MakeJsonRpcResponse(message.id, true));
         } else {
           const request = message as JsonRpcRequest;
-          api.route(request.method, request.params).then((result: any) => {
-            safeSend(websocket, MakeJsonRpcResponse(message.id, result || null));
-          }).catch((err) => {
-            safeSend(websocket, MakeJsonRpcError(message.id, JsonRpcErrorCode.InvalidParams, err.message, false));
-          });
+          api
+            .route(request.method, request.params)
+            .then((result: any) => {
+              safeSend(
+                websocket,
+                MakeJsonRpcResponse(message.id, result || null)
+              );
+            })
+            .catch(err => {
+              safeSend(
+                websocket,
+                MakeJsonRpcError(
+                  message.id,
+                  JsonRpcErrorCode.InvalidParams,
+                  err.message,
+                  false
+                )
+              );
+            });
         }
       } catch (err) {
-        safeSend(websocket, MakeJsonRpcError(message.id, JsonRpcErrorCode.ServerError, err.toString(), err));
+        safeSend(
+          websocket,
+          MakeJsonRpcError(
+            message.id,
+            JsonRpcErrorCode.ServerError,
+            err.toString(),
+            err
+          )
+        );
       }
     });
 
@@ -95,7 +155,7 @@ function setupServer(server: WebSocket.Server, api: API) {
       subscriptions.removeAllListeners();
     });
 
-    websocket.on('error', (err) => {
+    websocket.on('error', err => {
       console.error(err);
     });
   });

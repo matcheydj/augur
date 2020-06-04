@@ -37,7 +37,7 @@ import {
 } from 'modules/contracts/actions/contractCalls';
 
 import Styles from 'modules/modal/modal.styles.less';
-import { Getters, TXEventName } from '@augurproject/sdk';
+import type { Getters, TXEventName } from '@augurproject/sdk';
 import { loadAccountCurrentDisputeHistory } from 'modules/auth/actions/load-account-reporting';
 import ReleasableRepNotice from 'modules/reporting/containers/releasable-rep-notice';
 import { ExplainerBlock } from 'modules/create-market/components/common';

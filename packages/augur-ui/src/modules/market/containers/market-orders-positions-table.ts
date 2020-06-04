@@ -6,7 +6,7 @@ import { selectMarket } from 'modules/markets/selectors/market';
 import { cancelAllOpenOrders } from 'modules/orders/actions/cancel-order';
 import { selectUserFilledOrders } from 'modules/orders/selectors/filled-orders';
 import getUserOpenOrders from 'modules/orders/selectors/user-open-orders';
-import { TXEventName } from '@augurproject/sdk/src/constants';
+import type { TXEventName } from '@augurproject/sdk';
 import { addCanceledOrder } from 'modules/pending-queue/actions/pending-queue-management';
 
 const mapStateToProps = (state, ownProps) => {

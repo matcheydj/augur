@@ -1,4 +1,4 @@
-import { LoggerLevels } from '@augurproject/utils';
+import { LoggerLevels, NetworkId } from '@augurproject/utils';
 import path from 'path';
 import deepmerge from 'deepmerge';
 import requireAll from 'require-all';
@@ -173,18 +173,6 @@ export interface NetworkContractAddresses {
   104: ContractAddresses;
 }
 
-export enum NetworkId {
-  Mainnet = '1',
-  Ropsten = '3',
-  Rinkeby = '4',
-  Kovan = '42',
-  Private1 = '101',
-  Private2 = '102',
-  Private3 = '103',
-  Private4 = '104',
-  PrivateGanache = '123456',
-};
-
 export const DEFAULT_SDK_CONFIGURATION: SDKConfiguration = {
   networkId: NetworkId.PrivateGanache,
   ethereum: {
@@ -256,15 +244,6 @@ export const DEFAULT_SDK_CONFIGURATION: SDKConfiguration = {
   showReloadModal: true,
   averageBlocktime: 2000
 };
-
-export function isDevNetworkId(id: NetworkId): boolean {
-  return [
-    NetworkId.Mainnet,
-    NetworkId.Ropsten,
-    NetworkId.Rinkeby,
-    NetworkId.Kovan,
-  ].indexOf(id) === -1;
-}
 
 export function getConfigForNetwork(networkId: NetworkId, breakOnMulti=true, validate=true): SDKConfiguration {
   let targetConfig: SDKConfiguration = null;
@@ -465,7 +444,7 @@ export function configFromEnvvars(): RecursivePartial<SDKConfiguration> {
 
   if (t(e.ADDRESSES)) config = d(config, { addresses: JSON.parse(e.ADDRESSES) });
 
-  return config
+  return config;
 }
 
 export function refreshSDKConfig(): void {
@@ -499,14 +478,5 @@ export const environments: {[network: string]: SDKConfiguration} = {};
 
 if (process?.versions?.node) {
   loadSDKConfigs('./environments');
-} else {
-  // tslint:disable-next-line:ban-ts-ignore
-  // @ts-ignore
-  const context = require.context('./environments', false, /.*\.json$/);
-  const envNameRegex = new RegExp('([^\/]*)\.json$');
-  context.keys().forEach((file: string) => {
-    const key = file.match(envNameRegex)[1];
-    environments[key] = context(file);
-  });
 }
 

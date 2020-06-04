@@ -1,27 +1,31 @@
-import logError from 'utils/log-error';
-import { augurSdk } from 'services/augursdk';
-import { LoginAccount } from 'modules/types';
-import { updateLoginAccount } from 'modules/account/actions/login-account';
-import { ThunkDispatch } from 'redux-thunk';
-import { Action } from 'redux';
+import type { TXEventName } from '@augurproject/sdk';
+import { AppState } from 'appStore';
 import { toChecksumAddress } from 'ethereumjs-util';
+import { updateLoginAccount } from 'modules/account/actions/login-account';
+import { addAlert } from 'modules/alerts/actions/alerts';
 import {
-  updateAppStatus,
-  Ox_ENABLED,
   GSN_ENABLED,
+  Ox_ENABLED,
+  updateAppStatus,
   WALLET_STATUS,
 } from 'modules/app/actions/update-app-status';
-import { loadAccountDataFromLocalStorage } from './load-account-data-from-local-storage';
 import { IS_LOGGED, updateAuthStatus } from 'modules/auth/actions/auth-status';
 import { loadAccountData } from 'modules/auth/actions/load-account-data';
 import { updateAssets } from 'modules/auth/actions/update-assets';
-import { NetworkId } from '@augurproject/artifacts';
-import { AppState } from 'appStore';
+import {
+  CREATEAUGURWALLET,
+  MODAL_ERROR,
+  SUCCESS,
+  WALLET_STATUS_VALUES,
+} from 'modules/common/constants';
 import { updateModal } from 'modules/modal/actions/update-modal';
-import { MODAL_ERROR, WALLET_STATUS_VALUES, CREATEAUGURWALLET, SUCCESS } from 'modules/common/constants';
-import { TXEventName } from '@augurproject/sdk';
 import { addUpdatePendingTransaction } from 'modules/pending-queue/actions/pending-queue-management';
-import { addAlert } from 'modules/alerts/actions/alerts';
+import { LoginAccount } from 'modules/types';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { augurSdk } from 'services/augursdk';
+import logError from 'utils/log-error';
+import { loadAccountDataFromLocalStorage } from './load-account-data-from-local-storage';
 
 export const updateSdk = (
   loginAccount: Partial<LoginAccount>,
@@ -62,7 +66,7 @@ export const updateSdk = (
     await augurSdk.syncUserData(
       newAccount.mixedCaseAddress,
       newAccount.meta.signer,
-      networkId as NetworkId,
+      networkId,
       useGSN
     );
 

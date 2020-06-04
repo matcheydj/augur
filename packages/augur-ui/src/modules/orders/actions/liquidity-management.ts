@@ -12,7 +12,7 @@ import {
   approveToTrade,
   placeTrade,
 } from 'modules/contracts/actions/contractCalls';
-import { Getters, TXEventName } from '@augurproject/sdk';
+import type { Getters, TXEventName } from '@augurproject/sdk';
 import { setLiquidityOrderStatus } from 'modules/events/actions/liquidity-transactions';
 export const UPDATE_LIQUIDITY_ORDER = 'UPDATE_LIQUIDITY_ORDER';
 export const ADD_MARKET_LIQUIDITY_ORDERS = 'ADD_MARKET_LIQUIDITY_ORDERS';
