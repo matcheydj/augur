@@ -1,94 +1,86 @@
 import {
-  SPORTS,
-  GOLF,
-  TemplateInputType,
-  REQUIRED,
-  HOCKEY,
-  ValidationType,
-  HORSE_RACING,
-  TENNIS,
-  SOCCER,
-  MENS_LEAGUES,
-  CUSTOMIZED,
-  BASKETBALL,
-  NBA,
-  NCAA,
-  BASEBALL,
-  AMERICAN_FOOTBALL,
-  OLYMPICS,
-  NFL,
-  SUMMER,
-  WINTER,
-  POLITICS,
-  US_POLITICS,
-  WORLD,
-  FINANCE,
-  STOCKS,
-  STATISTICS,
-  INDEXES,
-  ENTERTAINMENT,
-  CRYPTO,
-  BITCOIN,
-  ETHEREUM,
-  LITECOIN,
-  PGA,
-  EURO_TOUR,
-  LPGA,
-  MEDICAL,
-  SINGLES,
-  DOUBLES,
-  WNBA,
-  TEXT_PLACEHOLDERS,
-  NFL_DRAFT,
-  NBA_DRAFT,
-  MONEY_LINE_MEGA,
-  WEEK_NO,
-  TEAM_B,
-  TEAM_A,
-  START_TIME,
-  SPREAD_MEGA,
-  OVER_UNDER_MEGA,
-  LEAGUE_NAME,
-  GENDER,
-  FUTURES,
-  OVER_UNDER,
-  SPREAD,
-  MONEY_LINE,
-  YEAR,
-  EVENT,
-  SET_GAME,
-  SUB_EVENT,
-  MMA,
-  BOXING,
-  CAR_RACING,
-  AWARDS,
-  TV_MOVIES,
-  SOCIAL_MEDIA,
-  TWITTER,
-  INSTAGRAM,
-} from './templates-template';
-import {
-  LIST_VALUES,
-  BASKETBALL_EVENT_DEP_TEAMS,
-  HOCKEY_EVENT_DEP_TEAMS,
   BASEBALL_EVENT_DEP_TEAMS,
-  FOOTBALL_EVENT_DEP_TEAMS,
-  NCAA_BASKETBALL_CONF_DEP_TEAMS,
-  TENNIS_SINGLES_EVENTS,
-  TENNIS_DOUBLES_EVENTS,
-  ENTERTAINMENT_EVENT_DEP_TEAMS,
+  BASKETBALL_EVENT_DEP_TEAMS,
   CRYPTO_BTC_CURRENCY_MARKETS,
   CRYPTO_ETH_CURRENCY_MARKETS,
   CRYPTO_LTC_CURRENCY_MARKETS,
-  OLYMPIC_SUMMER_SPORT_EVENTS,
-  OLYMPIC_WINTER_SPORT_EVENTS,
+  ENTERTAINMENT_EVENT_DEP_TEAMS,
   FIN_EXCHANGES_CLOSING_OFFSETS,
+  FIN_EXCHANGES_CURRENCIES,
+  FIN_EXCHANGES_HOLIDAY_CLOSURES,
   FIN_INDEXES_CLOSING_OFFSETS,
   FIN_INDEXES_HOLIDAY_CLOSURES,
-  FIN_EXCHANGES_HOLIDAY_CLOSURES,
+  FOOTBALL_EVENT_DEP_TEAMS,
+  HOCKEY_EVENT_DEP_TEAMS,
+  LIST_VALUES,
+  NCAA_BASKETBALL_CONF_DEP_TEAMS,
+  OLYMPIC_SUMMER_SPORT_EVENTS,
+  OLYMPIC_WINTER_SPORT_EVENTS,
   SOCCER_LEAGUE_DEP_TEAMS,
-  FIN_EXCHANGES_CURRENCIES,
+  TENNIS_DOUBLES_EVENTS,
+  TENNIS_SINGLES_EVENTS,
 } from './templates-lists';
+import {
+  AMERICAN_FOOTBALL,
+  AWARDS,
+  BASEBALL,
+  BASKETBALL,
+  BITCOIN,
+  BOXING,
+  CAR_RACING,
+  CRYPTO,
+  CUSTOMIZED,
+  DOUBLES,
+  ENTERTAINMENT,
+  ETHEREUM,
+  EURO_TOUR,
+  EVENT,
+  FINANCE,
+  GENDER,
+  GOLF,
+  groupTypes,
+  HOCKEY,
+  HORSE_RACING,
+  INDEXES,
+  LEAGUE_NAME,
+  LITECOIN,
+  LPGA,
+  MEDICAL,
+  MENS_LEAGUES,
+  MMA,
+  NBA,
+  NBA_DRAFT,
+  NCAA,
+  NFL,
+  NFL_DRAFT,
+  OLYMPICS,
+  PGA,
+  POLITICS,
+  REQUIRED,
+  SET_GAME,
+  SINGLES,
+  SOCCER,
+  SPORTS,
+  START_TIME,
+  STATISTICS,
+  STOCKS,
+  SUB_EVENT,
+  SUMMER,
+  TEAM_A,
+  TEAM_B,
+  TENNIS,
+  TV_MOVIES,
+  US_POLITICS,
+  WEEK_NO,
+  WINTER,
+  WNBA,
+  WORLD,
+  YEAR,
+  SOCIAL_MEDIA,
+  TWITTER,
+  INSTAGRAM,
+} from '@augurproject/sdk-lite';
+import { TemplateInputType, TEXT_PLACEHOLDERS, ValidationType } from './templates-template';
 
 const YES_NO = 'YesNo';
 const CATEGORICAL = 'Categorical';
@@ -111,7 +103,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MMA: [0] vs. [1], Who will win?`,
             example: `MMA: Donald Cerrone vs. Conor McGregor, Who will win?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: MONEY_LINE,
+            groupName: groupTypes.MONEY_LINE,
             inputs: [
               {
                 id: 0,
@@ -127,15 +119,15 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Draw/No Contest`,
-              },
-              {
-                id: 3,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Draw/No Contest`,
               },
             ],
             resolutionRules: {
@@ -162,7 +154,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MMA: [0] vs. [1] (O/U), [2].5 Rounds?`,
             example: `MMA: Donald Cerrone vs. Conor McGregor (O/U), 1.5 Rounds?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: OVER_UNDER,
+            groupName: groupTypes.OVER_UNDER,
             groupLineId: 2,
             inputs: [
               {
@@ -185,25 +177,25 @@ export const TEMPLATES = {
               },
               {
                 id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Over [2].5`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Under [2].5`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `No Contest`,
-              },
-              {
-                id: 6,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Over [2].5`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Under [2].5`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `No Contest`,
               },
             ],
             resolutionRules: {
@@ -227,7 +219,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MMA: [0] vs. [1], Method of victory?`,
             example: `MMA: Donald Cerrone vs. Conor McGregor, Method of victory?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -243,45 +235,45 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[0] by KO/TKO`,
-              },
-              {
-                id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[0] by Submission`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[0] by Points`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[1] by KO/TKO`,
-              },
-              {
-                id: 6,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[1] by Submission`,
-              },
-              {
-                id: 7,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[1] by Points`,
-              },
-              {
-                id: 8,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Draw/No Contest`,
-              },
-              {
-                id: 9,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[0] by KO/TKO`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[0] by Submission`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[0] by Points`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[1] by KO/TKO`,
+              },
+              {
+                id: 7,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[1] by Submission`,
+              },
+              {
+                id: 8,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[1] by Points`,
+              },
+              {
+                id: 9,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Draw/No Contest`,
               },
             ],
             resolutionRules: {
@@ -317,7 +309,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MMA: [0] vs. [1], How will fight end?`,
             example: `MMA UFC: Donald Cerrone vs. Conor McGregor, How will fight end?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -333,30 +325,30 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `KO/TKO`,
-              },
-              {
-                id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Submission`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Points`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `No Contest`,
-              },
-              {
-                id: 6,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `KO/TKO`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Submission`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Points`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `No Contest`,
               },
             ],
             resolutionRules: {
@@ -392,7 +384,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MMA: [0] vs. [1], What round will the fight end?`,
             example: `MMA: Donald Cerrone vs. Conor McGregor, What round will the fight end?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -408,45 +400,45 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Round 1`,
-              },
-              {
-                id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Round 2`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Round 3`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Round 4`,
-              },
-              {
-                id: 6,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Round 5`,
-              },
-              {
-                id: 7,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Goes the distance`,
-              },
-              {
-                id: 8,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `No Contest`,
-              },
-              {
-                id: 9,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Round 1`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Round 2`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Round 3`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Round 4`,
+              },
+              {
+                id: 7,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Round 5`,
+              },
+              {
+                id: 8,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Goes the distance`,
+              },
+              {
+                id: 9,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `No Contest`,
               },
             ],
             resolutionRules: {
@@ -477,7 +469,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Boxing: [0] vs. [1], Who will win?`,
             example: `Boxing: Robert Helenius vs. Adam Kownacki, Who will win?\nEstimated schedule start time: Feb 10, 2020 8:20 pm EST`,
-            groupName: MONEY_LINE,
+            groupName: groupTypes.MONEY_LINE,
             inputs: [
               {
                 id: 0,
@@ -493,15 +485,15 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Draw/No Contest`,
-              },
-              {
-                id: 3,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Draw/No Contest`,
               },
             ],
             resolutionRules: {
@@ -528,7 +520,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Boxing: [0] vs. [1] (O/U), [2].5 Rounds?`,
             example: `Boxing: Robert Helenius vs. Adam Kownacki (O/U), 5.5 Rounds?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: OVER_UNDER,
+            groupName: groupTypes.OVER_UNDER,
             groupLineId: 2,
             inputs: [
               {
@@ -545,32 +537,32 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
+                type: TemplateInputType.ESTDATETIME,
+                hoursAfterEst: 9,
+                groupKey: START_TIME,
+                placeholder: `Date time`,
+              },
+              {
+                id: 3,
                 type: TemplateInputType.DROPDOWN,
                 placeholder: `Round #`,
                 noSort: true,
                 values: LIST_VALUES.BOXING_ROUNDS,
               },
               {
-                id: 3,
+                id: 4,
                 type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
                 placeholder: `Over [2].5`,
               },
               {
-                id: 4,
+                id: 5,
                 type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
                 placeholder: `Under [2].5`,
               },
               {
-                id: 5,
+                id: 6,
                 type: TemplateInputType.ADDED_OUTCOME,
                 placeholder: `No Contest`,
-              },
-              {
-                id: 6,
-                type: TemplateInputType.ESTDATETIME,
-                hoursAfterEst: 9,
-                groupKey: START_TIME,
-                placeholder: `Date time`,
               },
             ],
             resolutionRules: {
@@ -594,7 +586,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Boxing: [0] vs. [1], Method of victory?`,
             example: `Boxing: Robert Helenius vs. Adam Kownacki, Method of victory?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -610,45 +602,45 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[0] by KO`,
-              },
-              {
-                id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[0] by TKO`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[0] by Points`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[1] by KO`,
-              },
-              {
-                id: 6,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[1] by TKO`,
-              },
-              {
-                id: 7,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `[1] by Points`,
-              },
-              {
-                id: 8,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Draw/No Contest`,
-              },
-              {
-                id: 9,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[0] by KO`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[0] by TKO`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[0] by Points`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[1] by KO`,
+              },
+              {
+                id: 7,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[1] by TKO`,
+              },
+              {
+                id: 8,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `[1] by Points`,
+              },
+              {
+                id: 9,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Draw/No Contest`,
               },
             ],
             resolutionRules: {
@@ -684,7 +676,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Boxing: [0] vs. [1], How will fight end?`,
             example: `Boxing: Robert Helenius vs. Adam Kownacki, How will fight end?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -700,30 +692,30 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `KO`,
-              },
-              {
-                id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `TKO`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Points`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `No Contest`,
-              },
-              {
-                id: 6,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `KO`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `TKO`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Points`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `No Contest`,
               },
             ],
             resolutionRules: {
@@ -753,7 +745,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Boxing: [0] vs. [1], What round will the fight end?`,
             example: `Boxing: Robert Helenius vs. Adam Kownacki, What round will the fight end?\nEstimated schedule start time: Jan 18, 2020 8:20 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -769,40 +761,40 @@ export const TEMPLATES = {
               },
               {
                 id: 2,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Round 1-3`,
-              },
-              {
-                id: 3,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Round 4-6`,
-              },
-              {
-                id: 4,
-                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
-                placeholder: `Round 7-9`,
-              },
-              {
-                id: 5,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Round 10-12`,
-              },
-              {
-                id: 6,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `Goes the Distance`,
-              },
-              {
-                id: 7,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `No Contest`,
-              },
-              {
-                id: 8,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 9,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 3,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Round 1-3`,
+              },
+              {
+                id: 4,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Round 4-6`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.SUBSTITUTE_USER_OUTCOME,
+                placeholder: `Round 7-9`,
+              },
+              {
+                id: 6,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Round 10-12`,
+              },
+              {
+                id: 7,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `Goes the Distance`,
+              },
+              {
+                id: 8,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `No Contest`,
               },
             ],
             resolutionRules: {
@@ -830,7 +822,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `NASCAR [0] [1]: Winner?`,
             example: `NASCAR 2020 Daytona 500: Winner?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-            groupName: MONEY_LINE,
+            groupName: groupTypes.MONEY_LINE,
             inputs: [
               {
                 id: 0,
@@ -892,7 +884,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `NASCAR [0] [1]: [2] vs. [3]: Who will finish better?`,
             example: `NASCAR 2020 Daytona 500: Who will finish better?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -923,15 +915,15 @@ export const TEMPLATES = {
               },
               {
                 id: 4,
-                type: TemplateInputType.ADDED_OUTCOME,
-                placeholder: `No Contest`,
-              },
-              {
-                id: 5,
                 type: TemplateInputType.ESTDATETIME,
                 hoursAfterEst: 24,
                 groupKey: START_TIME,
                 placeholder: `Date time`,
+              },
+              {
+                id: 5,
+                type: TemplateInputType.ADDED_OUTCOME,
+                placeholder: `No Contest`,
               },
             ],
             resolutionRules: {
@@ -967,7 +959,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `NASCAR [0] CUP Series Championship Winner?`,
             example: `NASCAR 2020 CUP Series Championship Winner?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -1115,7 +1107,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `PGA: Which golfer will win the [0] [1]?`,
                 example: `PGA: Which golfer will win the 2020 PGA Championship?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -1162,7 +1154,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `PGA: Which team will win the [0] Presidents Cup?`,
                 example: `PGA: Which team will win the 2020 Presidents Cup?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 noAdditionalUserOutcomes: true,
                 inputs: [
                   {
@@ -1317,7 +1309,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Euro Tour: Which golfer will win the [0] [1]?`,
                 example: `Euro Tour: Which golfer will win the 2020 Omega Dubai Dessert Classic?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -1364,7 +1356,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Euro Tour: Which golf team will win the [0] Ryders Cup?`,
                 example: `Euro Tour: Which golf team will win the 2020 Ryders Cup?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 noAdditionalUserOutcomes: true,
                 inputs: [
                   {
@@ -1496,7 +1488,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `LPGA: Which golfer will win the [0] [1]?`,
                 example: `LPGA: Which golfer will win the 2020 U.S. Women's Open?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -1663,7 +1655,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `NHL: Which team will win: [0] vs. [1]?`,
             example: `NHL: Which Team will win: NY Rangers vs. NJ Devils?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-            groupName: MONEY_LINE_MEGA,
+            groupName: groupTypes.DAILY_MONEY_LINE,
             inputs: [
               {
                 id: 0,
@@ -1710,7 +1702,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `NHL (Goal Spread): [0] to win by more than [1].5 goals over the [2]?`,
             example: `NHL (Goal Spread): St Louis Blues to win by more than 2.5 goals over the NY Rangers?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-            groupName: SPREAD_MEGA,
+            groupName: groupTypes.DAILY_SPREAD,
             inputs: [
               {
                 id: 0,
@@ -1773,7 +1765,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `NHL (O/U): [0] vs. [1]: Total goals scored; Over/Under [2].5?`,
             example: `NHL (O/U): St Louis Blues vs. NY Rangers: Total goals scored Over/Under 4.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-            groupName: OVER_UNDER_MEGA,
+            groupName: groupTypes.DAILY_OVER_UNDER,
             groupLineId: 2,
             inputs: [
               {
@@ -1837,7 +1829,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Which NHL team will win the [0] [1]?`,
             example: `Which NHL team will win the 2019-20 Stanley Cup?`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -1888,7 +1880,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Which NHL player will win the [0] [1]?`,
             example: `Which NHL player will win the 2019-20 Calder Trophy?`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -2006,7 +1998,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Which horse will win the [0] [1]?`,
             example: `Which horse will win the 2020 Kentucky Derby?`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -2108,7 +2100,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Singles Tennis: Which player will win the [1] [2]?`,
                 example: `Men's Singles Tennis: Which player will win the 2020 Australian Open?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -2164,7 +2156,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Singles Tennis [1] [2]: Who will win Set number [3], [4] vs. [5]?`,
                 example: `Men's Singles Tennis 2020 French Open: Who will win Set number 3, Novak Djokovic vs. Rafael Nadal?`,
-                groupName: MONEY_LINE,
+                groupName: groupTypes.MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -2242,7 +2234,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Singles Tennis [1] [2] (O/U), [3] vs. [4]: Total [5] played in a match; Over/Under [6].5?`,
                 example: `Men's Singles Tennis 2020 French Open (O/U), Novak Djokovic vs. Rafael Nadal: Total games played in a match; Over/Under 15.5?`,
-                groupName: OVER_UNDER,
+                groupName: groupTypes.OVER_UNDER,
                 groupLineId: 6,
                 inputs: [
                   {
@@ -2336,7 +2328,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Single Tennis: [1] [2] Match play winner: [3] vs. [4]?`,
                 example: `Men's Single Tennis: 2020 Wimbledon Match play winner between Roger Federer vs. Rafael Nadal?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -2459,7 +2451,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Doubles Tennis: Which player/player will win the [1] [2]?`,
                 example: `Men's Doubles Tennis: Which player/player will win the 2020 Australian Open?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -2518,7 +2510,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Doubles Tennis [1] [2]: Who will win Set number [3], [4] vs. [5]?`,
                 example: `Men's Doubles Tennis 2020 French Open: Who will win Set number 3, Kevin Krawietz/Andreas Mies vs. Bob Bryan/Mike Bryan?`,
-                groupName: MONEY_LINE,
+                groupName: groupTypes.MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -2598,7 +2590,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Doubles Tennis [1] [2] (O/U), [3] vs. [4]: Total [5] played in a match; Over/Under [6].5?`,
                 example: `Men's Doubles Tennis 2020 French Open (O/U), Kevin Krawietz/Andreas Mies vs. Bob Bryan/Mike Bryan: Total games played in a match; Over/Under 15.5?`,
-                groupName: OVER_UNDER,
+                groupName: groupTypes.OVER_UNDER,
                 groupLineId: 6,
                 inputs: [
                   {
@@ -2695,7 +2687,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] Doubles Tennis: [1] [2] Match play winner: [3] vs. [4]?`,
                 example: `Men's Doubles Tennis: 2020 Wimbledon Match play winner between Kevin Krawietz/Andreas Mies vs. Bob Bryan/Mike Bryan?`,
-                groupName: MONEY_LINE,
+                groupName: groupTypes.MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -2779,7 +2771,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Men's [0]: Which team will win: [1] vs. [2]?`,
                 example: `Men's English Premier League: Which team will win: Manchester City vs. Manchester United?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: MONEY_LINE,
+                groupName: groupTypes.MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -2858,7 +2850,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Men's [0] (Point Spread): [1] to win by more than [2].5 goals over [3]?`,
                 example: `Men's Ligue 1 (France): Marseille to win by more than 1.5 goals over Lyon?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: SPREAD,
+                groupName: groupTypes.SPREAD,
                 groupLineId: 2,
                 inputs: [
                   {
@@ -2939,7 +2931,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Men's [0] (O/U): [1] vs. [2]: Total goals scored; Over/Under [3].5?`,
                 example: `Men's MLS (USA) (O/U): Real Madrid vs. Manchester United: Total goals scored Over/Under 4.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: OVER_UNDER,
+                groupName: groupTypes.OVER_UNDER,
                 groupLineId: 3,
                 inputs: [
                   {
@@ -3408,7 +3400,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NBA: Which team will win: [0] vs. [1]?`,
                 example: `NBA: Which Team will win: Brooklyn Nets vs. NY Knicks?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: MONEY_LINE_MEGA,
+                groupName: groupTypes.DAILY_MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -3452,7 +3444,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NBA (Point Spread): [0] to win by more than [1].5 points over the [2]?`,
                 example: `NBA (Point Spread): Brooklyn Nets to win by more than 10.5 points over the NY Knicks?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: SPREAD_MEGA,
+                groupName: groupTypes.DAILY_SPREAD,
                 inputs: [
                   {
                     id: 0,
@@ -3512,7 +3504,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NBA (O/U): [0] vs. [1]: Total Points scored; Over/Under [2].5?`,
                 example: `NBA (O/U): Brooklyn Nets vs. NY Knicks: Total Points scored: Over/Under 164.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: OVER_UNDER_MEGA,
+                groupName: groupTypes.DAILY_OVER_UNDER,
                 groupLineId: 2,
                 inputs: [
                   {
@@ -3573,7 +3565,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which NBA team will win the [0] [1]?`,
                 example: `Which NBA team will win the 2019-20 Western Conference Finals?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -3625,7 +3617,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which NBA player will win the [0] [1] award?`,
                 example: `Which NBA player will win the 2019-20 Most Valuable Player award?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -3665,7 +3657,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NBA: Which Player will have the most [0] at the end of the the [1] regular season?`,
                 example: `NBA: Which Player will have the most Points scored at the end of the the 2019-20 regular season?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -3769,7 +3761,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NBA Draft: Who will be the [1] overall pick?`,
                 example: `2020 NBA Draft: Who will be the 1st overall pick?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -3816,7 +3808,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NBA Draft: The First draft pick by the [1]?`,
                 example: `2020 NBA Draft: The First draft pick by the LA Lakers?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -3863,7 +3855,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NBA Draft(O/U): When will [1] be selected? Over/Under, Pick [2].5?`,
                 example: `2020 NBA Draft(O/U): When will Tua Tagovailoa be selected? Over/Under, Pick 2.5?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: OVER_UNDER,
+                groupName: groupTypes.OVER_UNDER,
                 groupLineId: 2,
                 inputs: [
                   {
@@ -4115,7 +4107,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `WNBA: Which team will win: [0] vs. [1]?`,
                 example: `WNBA: Which Team will win: Phoenix Mercury vs. Seattle Storm?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: MONEY_LINE_MEGA,
+                groupName: groupTypes.DAILY_MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -4159,7 +4151,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `WNBA (Point Spread): [0] to win by more than [1].5 points over the [2]?`,
                 example: `WNBA (Point Spread): Phoenix Mercury to win by more than 10.5 points over the Seattle Storm?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: SPREAD_MEGA,
+                groupName: groupTypes.DAILY_SPREAD,
                 inputs: [
                   {
                     id: 0,
@@ -4219,7 +4211,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `WNBA (O/U): [0] vs. [1]: Total Points scored; Over/Under [2].5?`,
                 example: `WNBA (O/U): Phoenix Mercury vs. Seattle Storm: Total Points scored: Over/Under 164.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: OVER_UNDER_MEGA,
+                groupName: groupTypes.DAILY_OVER_UNDER,
                 groupLineId: 2,
                 inputs: [
                   {
@@ -4278,7 +4270,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which WNBA team will win the [0] Championship?`,
                 example: `Which WNBA team will win the 2019-20 Championship?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -4320,7 +4312,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which WNBA player will win the [0] [1] award?`,
                 example: `Which WNBA player will win the 2019-20 Most Valuable Player award?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -4360,7 +4352,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `WNBA: Which Player will have the most [0] at the end of the the [1] regular season?`,
                 example: `WNBA: Which Player will have the most Points scored at the end of the the 2019-20 regular season?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -4685,7 +4677,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA [0] BB: Which team will win: [1] vs. [2]?`,
                 example: `NCAA Men's BB: Which Team will win: Duke vs. Kentucky?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: MONEY_LINE_MEGA,
+                groupName: groupTypes.DAILY_MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -4739,7 +4731,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA [0] BB (Point Spread): [1] to win by more than [2].5 points over [3]?`,
                 example: `NCAA Men's BB (Point Spread): Duke to win by more than 10.5 points over Kentucky?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: SPREAD_MEGA,
+                groupName: groupTypes.DAILY_SPREAD,
                 inputs: [
                   {
                     id: 0,
@@ -4809,7 +4801,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA [0] BB (O/U): [1] vs. [2]: Total Points scored; Over/Under [3].5?`,
                 example: `NCAA Men's BB (O/U): Duke vs. Arizona: Total Points scored: Over/Under 164.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: OVER_UNDER_MEGA,
+                groupName: groupTypes.DAILY_OVER_UNDER,
                 groupLineId: 3,
                 inputs: [
                   {
@@ -4877,7 +4869,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA [0] BB: Which college basketball team will win the [1] [2] tournament?`,
                 example: `NCAA Men's BB: Which college basketball team will win the 2020 ACC tournament?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -4938,7 +4930,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA [0] BB: Which college basketball team will win the [1] D1 National Championship?`,
                 example: `NCAA Men's BB: Which college basketball team will win the 2020 National Championship?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -5042,7 +5034,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MLB: Which team will win: [0] vs. [1]?`,
             example: `MLB: Which Team will win: Yankees vs. Red Sox?\nEstimated schedule start time: Sept 19, 2019 8:20 pm EST`,
-            groupName: MONEY_LINE_MEGA,
+            groupName: groupTypes.DAILY_MONEY_LINE,
             inputs: [
               {
                 id: 0,
@@ -5092,7 +5084,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MLB (Run Spread): [0] to win by more than [1].5 runs over the [2]?`,
             example: `MLB (Run Spread): NY Yankees to win by more than 2.5 runs over the Boston Red Sox?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-            groupName: SPREAD_MEGA,
+            groupName: groupTypes.DAILY_SPREAD,
             inputs: [
               {
                 id: 0,
@@ -5158,7 +5150,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MLB (O/U): [0] vs. [1]: Total Runs scored; Over/Under [2].5?`,
             example: `MLB (O/U): NY Yankees vs. Boston Red Sox: Total Runs scored; Over/Under 9.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-            groupName: OVER_UNDER_MEGA,
+            groupName: groupTypes.DAILY_OVER_UNDER,
             groupLineId: 2,
             inputs: [
               {
@@ -5225,7 +5217,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `Which MLB team will win the [0] [1]?`,
             example: `Which MLB team will win the 2020 World Series?`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -5276,7 +5268,7 @@ export const TEMPLATES = {
             marketType: CATEGORICAL,
             question: `MLB: Which player will win the [0] [1]?`,
             example: `MLB: Which Player will win the 2019 American League Cy Young award?`,
-            groupName: FUTURES,
+            groupName: groupTypes.FUTURES,
             inputs: [
               {
                 id: 0,
@@ -5560,7 +5552,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Olympics: Which country will win the most [0] medals at the [1] Summer Olympics?`,
                 example: `Olympics: Which country will win the most Gold medals at the 2020 Summer Olympics`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -5603,7 +5595,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Olympics [0]: Which country will win the Gold medal in [1] at the [2] Summer Olympics?`,
                 example: `Olympics Tennis: Which country will win the Gold medal in Singles (Men/Women) at the 2020 Summer Olympics`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -5902,7 +5894,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Olympics: Which country will win the most [0] medals at the [1] Winter Olympics?`,
                 example: `Olympics: Which country will win the most Gold medals at the 2020 Winter Olympics`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -5945,7 +5937,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Olympics [0]: Which country will win the Gold medal in [1] at the [2] Winter Olympics?`,
                 example: `Olympics Curling: Which country will win the Gold medal in mens at the 2020 Winter Olympics`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -6301,7 +6293,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0]: Which NFL Team will win: [1] vs. [2]?`,
                 example: ` Week 1: Which NFL Team will win: NY Giants vs. New England Patriots?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: MONEY_LINE_MEGA,
+                groupName: groupTypes.DAILY_MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -6354,7 +6346,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NFL (Point Spread) [0]: [1] to win by more than [2].5 points over [3]?`,
                 example: `NFL (Point Spread) Week 1: Seattle Seahawks to win by more than 10.5 points over Dallas Cowboys?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: SPREAD_MEGA,
+                groupName: groupTypes.DAILY_SPREAD,
                 inputs: [
                   {
                     id: 0,
@@ -6423,7 +6415,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NFL (O/U) [0]: [1] vs. [2]: Total points scored; Over/Under [3].5?`,
                 example: `NFL (O/U) Week 1: NY Giants vs. Dallas Cowboys: Total points scored: Over/Under 56.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: OVER_UNDER_MEGA,
+                groupName: groupTypes.DAILY_OVER_UNDER,
                 groupLineId: 3,
                 inputs: [
                   {
@@ -6493,7 +6485,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which NFL team will win the [0] [1]?`,
                 example: `Which NFL team will win the 2020 AFC Championship game?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -6545,7 +6537,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which NFL player will win the [0] season [1] award?`,
                 example: `Which NFL player will win the 2019-20 season Most Valuable Player award?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -6628,7 +6620,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NFL Draft: Who will be the [1] overall pick?`,
                 example: `2020 NFL Draft: Who will be the 1st overall pick?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -6674,7 +6666,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NFL Draft: Who will be the first [1] selected?`,
                 example: `2020 NFL Draft: Who will be the first Quarterback selected?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -6722,7 +6714,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NFL Draft: The First draft pick by the [1]?`,
                 example: `2020 NFL Draft: The First draft pick by the NY Giants?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -6769,7 +6761,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NFL Draft(O/U): [1].5 Total [2] drafted in Round 1?`,
                 example: `2020 NFL Draft(O/U): 5.5 Total Quarterbacks drafted in Round 1?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: OVER_UNDER,
+                groupName: groupTypes.OVER_UNDER,
                 groupLineId: 1,
                 inputs: [
                   {
@@ -6826,7 +6818,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `[0] NFL Draft(O/U): When will [1] be selected? Over/Under, Pick [2].5?`,
                 example: `2020 NFL Draft(O/U): When will Tua Tagovailoa be selected? Over/Under, Pick 2.5?\nEstimated schedule start time: Sept 19, 2020 1:00 pm EST`,
-                groupName: OVER_UNDER,
+                groupName: groupTypes.OVER_UNDER,
                 groupLineId: 2,
                 inputs: [
                   {
@@ -7030,7 +7022,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA FB [0]: Which College Football Team will win: [1] vs. [2]?`,
                 example: `NCAA FB Week 1: Which College Football Team will win: Alabama vs. Michigan?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: MONEY_LINE_MEGA,
+                groupName: groupTypes.DAILY_MONEY_LINE,
                 inputs: [
                   {
                     id: 0,
@@ -7083,7 +7075,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA FB (Point Spread) [0]: [1] to win by more than [2].5 points over [3]?`,
                 example: `NCAA FB (Point Spread) Week 1: Alabama to win by more than 10.5 points over Michigan?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: SPREAD_MEGA,
+                groupName: groupTypes.DAILY_SPREAD,
                 inputs: [
                   {
                     id: 0,
@@ -7152,7 +7144,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `NCAA FB (O/U) [0]: [1] vs. [2]: Total points scored; Over/Under [3].5?`,
                 example: `NCAA FB (O/U) Week 1: Alabama vs. Michigan: Total points scored: Over/Under 56.5?\nEstimated schedule start time: Sept 19, 2019 1:00 pm EST`,
-                groupName: OVER_UNDER_MEGA,
+                groupName: groupTypes.DAILY_OVER_UNDER,
                 groupLineId: 3,
                 inputs: [
                   {
@@ -7222,7 +7214,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which college football team will win [0] National Championship?`,
                 example: `Which college football team will win 2020 National Championship?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -7272,7 +7264,7 @@ export const TEMPLATES = {
                 marketType: CATEGORICAL,
                 question: `Which college football player will win the [0] Heisman Trophy?`,
                 example: `Which college football player will win the 2020 Heisman Trophy?`,
-                groupName: FUTURES,
+                groupName: groupTypes.FUTURES,
                 inputs: [
                   {
                     id: 0,
@@ -8633,7 +8625,8 @@ export const TEMPLATES = {
                   {
                     id: 1,
                     type: TemplateInputType.TEXT,
-                    validationType: ValidationType.WHOLE_NUMBER,
+                    validationType: ValidationType.NUMBER_ONE_DECIMAL,
+                    numberRange: [0.1, 999.9],
                     placeholder: `Number`,
                   },
                   {
@@ -8656,6 +8649,9 @@ export const TEMPLATES = {
                     },
                     {
                       text: 'If the twitter handle named in the market does not exist, the market should resolve as "Invalid".',
+                    },
+                    {
+                      text: `If www.socialblade.com is down or not available use www.socialtracker.io to determine the results for the specified handle/account on the date named in the market question.`
                     }
                   ],
                 },
@@ -8702,6 +8698,9 @@ export const TEMPLATES = {
                     },
                     {
                       text: 'If the twitter handle named in the market does not exist, the market should resolve as "Invalid".',
+                    },
+                    {
+                      text: `If www.socialblade.com is down or not available use www.socialtracker.io to determine the results for the specified handle/account on the date named in the market question.`
                     }
                   ],
                 },
@@ -8725,7 +8724,8 @@ export const TEMPLATES = {
                   {
                     id: 1,
                     type: TemplateInputType.TEXT,
-                    validationType: ValidationType.WHOLE_NUMBER,
+                    validationType: ValidationType.NUMBER_ONE_DECIMAL,
+                    numberRange: [0.1, 999.9],
                     placeholder: `Number`,
                   },
                   {
@@ -8748,6 +8748,9 @@ export const TEMPLATES = {
                     },
                     {
                       text: 'If the instagram account named in the market does not exist, the market should resolve as "Invalid".',
+                    },
+                    {
+                      text: `If www.socialblade.com is down or not available use www.socialtracker.io to determine the results for the specified handle/account on the date named in the market question.`
                     }
                   ],
                 },
@@ -8794,6 +8797,9 @@ export const TEMPLATES = {
                     },
                     {
                       text: 'If the instagram account named in the market does not exist, the market should resolve as "Invalid".',
+                    },
+                    {
+                      text: `If www.socialblade.com is down or not available use www.socialtracker.io to determine the results for the specified handle/account on the date named in the market question.`
                     }
                   ],
                 },

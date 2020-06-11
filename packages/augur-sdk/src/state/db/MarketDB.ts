@@ -1,28 +1,29 @@
 import { getGroupHashInfo, isTemplateMarket } from '@augurproject/artifacts';
-import {
-  CLAIM_GAS_COST,
-  DEFAULT_GAS_PRICE_IN_GWEI,
-  EULERS_NUMBER,
-  INVALID_OUTCOME,
-  MarketData,
-  MarketReportingState,
-  MINIMUM_INVALID_ORDER_VALUE_IN_ATTO_DAI,
-  NewBlock,
-  OrderTypeHex,
-  orderTypes,
-  SECONDS_IN_A_DAY,
-  SECONDS_IN_A_YEAR,
-  SubscriptionEventName,
-  TimestampSetLog,
-  UnixTimestamp,
-  WORST_CASE_FILL,
-} from '@augurproject/sdk-lite';
 import { ParsedLog } from '@augurproject/types';
 import { BigNumber } from 'bignumber.js';
 import * as _ from 'lodash';
 import { OrderBook } from '../../api/Liquidity';
 import { Augur } from '../../Augur';
+import {
+  CLAIM_GAS_COST,
+  DEFAULT_GAS_PRICE_IN_GWEI,
+  EULERS_NUMBER,
+  INVALID_OUTCOME,
+  MarketReportingState,
+  MINIMUM_INVALID_ORDER_VALUE_IN_ATTO_DAI,
+  SECONDS_IN_A_DAY,
+  SECONDS_IN_A_YEAR,
+  SubscriptionEventName,
+  WORST_CASE_FILL,
+} from '../../constants';
+import { NewBlock } from '../../events';
 import { padHex, QUINTILLION } from '../../utils';
+import {
+  MarketData,
+  OrderTypeHex,
+  TimestampSetLog,
+  UnixTimestamp,
+} from '../logs/types';
 import { DB } from './DB';
 import { DerivedDB } from './DerivedDB';
 
@@ -538,14 +539,19 @@ export class MarketDB extends DerivedDB {
           log['outcomes'],
           log['extraInfo'].longDescription,
           log['endTime'],
+          log['timestamp'],
           errors
         );
         if (errors.length > 0)
           console.error(log['extraInfo'].description, errors);
 
         if (log['isTemplate']) {
-          const groupHashInfo = getGroupHashInfo(log['extraInfo'].template);
-          console.log(groupHashInfo);
+          const { groupLine, groupType, hashKeyInputValues } = getGroupHashInfo(
+            log['extraInfo'].template
+          );
+          log['templateGroupHash'] = hashKeyInputValues;
+          log['templateGroupType'] = groupType;
+          if (groupLine) log['templateGroupLine'] = groupLine;
         }
       }
     } catch (err) {

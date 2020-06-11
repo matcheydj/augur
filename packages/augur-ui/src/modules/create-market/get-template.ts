@@ -1,18 +1,3 @@
-import {
-  Categories,
-  CategoryTemplate,
-  CHOICE,
-  getTemplateExchangeClosingWithBuffer,
-  REQUIRED,
-  ResolutionRules,
-  RETIRED_TEMPLATES,
-  Template,
-  TEMPLATE_VALIDATIONS,
-  TemplateInput,
-  TemplateInputType,
-  TEMPLATES,
-  TimeOffset,
-} from '@augurproject/artifacts';
 import type { Getters } from '@augurproject/sdk';
 import {
   CATEGORICAL,
@@ -26,6 +11,21 @@ import {
   ScalarMarketIcon,
   YesNoMarketIcon,
 } from 'modules/common/icons';
+  TimeOffset
+} from '@augurproject/templates';
+import {
+  TEMPLATES,
+  TEMPLATE_VALIDATIONS,
+  RETIRED_TEMPLATES,
+  getTemplateExchangeClosingWithBuffer,
+  TemplateInputType,
+} from '@augurproject/templates';
+import {
+  REQUIRED,
+  CHOICE,
+} from '@augurproject/sdk-lite'
+import { YesNoMarketIcon, CategoricalMarketIcon, ScalarMarketIcon } from 'modules/common/icons';
+import { YES_NO, CATEGORICAL, SCALAR, YES_NO_OUTCOMES, SCALAR_OUTCOMES } from 'modules/common/constants';
 import { NameValuePair } from 'modules/common/selection';
 import {
   MARKET_SUB_TEMPLATES,

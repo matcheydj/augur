@@ -1,4 +1,4 @@
-import { ExtraInfoTemplate } from '@augurproject/artifacts';
+import type { ExtraInfoTemplate } from '@augurproject/templates';
 import {
   Address,
   MarketReportingStateByNum,

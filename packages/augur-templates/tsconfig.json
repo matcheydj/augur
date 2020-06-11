@@ -2,18 +2,14 @@
   "extends": "../../tsconfig-base.json",
   "compilerOptions": {
     "outDir": "build",
-    "rootDir": "src",
-    "experimentalDecorators": true
+    "rootDir": "src"
   },
   "include": [
     "src/**/*"
   ],
   "references": [
     {
-      "path": "../augur-artifacts"
+      "path": "../augur-sdk-lite"
     },
-    {
-      "path": "../augur-utils"
-    }
   ]
 }

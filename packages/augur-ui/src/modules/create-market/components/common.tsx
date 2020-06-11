@@ -1,13 +1,4 @@
-import {
-  CHOICE,
-  REQUIRED,
-  Template,
-  TemplateInput,
-  TemplateInputType,
-  UserInputDateTime,
-  ValidationType,
-} from '@augurproject/artifacts';
-import type { SECONDS_IN_A_DAY } from '@augurproject/sdk';
+import React, { Component, useState, useEffect, useReducer, Fragment } from 'react';
 import classNames from 'classnames';
 
 import { SecondaryButton } from 'modules/common/buttons';
@@ -64,6 +55,39 @@ import {
   startOfTomorrow,
   timestampComponents,
 } from 'utils/format-date';
+import MarkdownRenderer from 'modules/common/markdown-renderer';
+import {
+  buildMarketDescription,
+  createTemplateOutcomes,
+  substituteUserOutcome,
+  createTemplateValueList,
+  getEventExpirationForExchange,
+} from 'modules/create-market/get-template';
+import type {
+  TemplateInput,
+  Template,
+  UserInputDateTime,
+} from '@augurproject/templates';
+import {
+  TemplateInputType,
+  ValidationType,
+} from '@augurproject/templates';
+import {
+  CHOICE,
+  REQUIRED,
+} from '@augurproject/sdk-lite'
+import {
+  TemplateBannerText,
+  SelectEventNoticeText,
+  MARKET_COPY_LIST,
+  FRIDAY_DAY_OF_WEEK,
+} from 'modules/create-market/constants';
+import {
+  DismissableNotice,
+  DISMISSABLE_NOTICE_BUTTON_TYPES,
+} from 'modules/reporting/common';
+import PreviewMarketTitle from 'modules/market/components/common/PreviewMarketTitle';
+import { SECONDS_IN_A_DAY } from '@augurproject/sdk-lite';
 
 export interface HeaderProps {
   text: string;
@@ -323,6 +347,44 @@ export const ExplainerBlock = (props: ExplainerBlockProps) => (
         );
       })}
     </ul>
+  </div>
+);
+
+interface ContentProps {
+  title: string;
+  subtexts: string[];
+  useBullets: boolean;
+}
+
+export interface MultipleExplainerBlockProps {
+  contents: ContentProps[];
+  isModal?: boolean;
+}
+
+export const MultipleExplainerBlock = ({contents, isModal}: MultipleExplainerBlockProps) => (
+  <div
+    className={classNames(Styles.ExplainerBlock, {
+      [Styles.ModalStyling]: isModal,
+    })}
+  >
+    {contents?.length && contents.map(({title, subtexts, useBullets}, index) => (
+      <Fragment key={index}>
+        <h5>{title}</h5>
+        <ul
+          className={classNames({
+            [Styles.NotBulleted]: !useBullets,
+          })}
+        >
+          {subtexts?.length && subtexts.map((subtext, index) => {
+            return useBullets ? (
+              <li key={index}>{subtext}</li>
+            ) : (
+              <p key={index}>{subtext}</p>
+            );
+          })}
+        </ul>
+      </Fragment>
+    ))}
   </div>
 );
 

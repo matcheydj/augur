@@ -8,14 +8,16 @@ import isAddress from 'modules/auth/helpers/is-address';
 import { createBigNumber } from 'utils/create-big-number';
 import { ZERO } from './constants';
 import { NewMarketPropertiesValidations } from 'modules/types';
-import {
-  ValidationType,
-  TemplateInputType,
-  TemplateInput,
+import type {
   UserInputDateTime,
+  TemplateInput,
+} from '@augurproject/templates'
+import {
   tellOnHoliday,
+  TemplateInputType,
+  ValidationType,
   ValidationTemplateInputType,
-} from '@augurproject/artifacts';
+} from '@augurproject/templates';
 import moment from 'moment';
 import { datesOnSameDay } from 'utils/format-date';
 
@@ -213,6 +215,11 @@ export function checkForUserInputFilled(
       isPositive(input.userInput)
     ) {
       return 'Must be a whole positive number';
+    } else if (
+      (input.validationType === ValidationType.NUMBER || input.validationType === ValidationType.NUMBER_ONE_DECIMAL) && input.numberRange &&
+      (checkValidNumber(input.userInput) || Number(input.userInput) < input.numberRange[0] || Number(input.userInput) > input.numberRange[1])
+    ) {
+      return `value range is ${input.numberRange[0]} to ${input.numberRange[1]}`;
     } else if (
       (input.validationType === ValidationType.NUMBER || input.validationType === ValidationType.NUMBER_ONE_DECIMAL) &&
       checkValidNumber(input.userInput)

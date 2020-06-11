@@ -20,6 +20,7 @@ import { Markets } from '../state/getter/Markets';
 import { Checkpoints } from './Checkpoints';
 
 export const WARPSYNC_VERSION = '1';
+const FILE_FETCH_TIMEOUT = 10000; // 10 seconds
 
 type NameOfType<T, R> = {
   [P in keyof T]: T[P] extends R ? P : never;
@@ -302,9 +303,14 @@ export class WarpController {
   }
 
   getFile(ipfsPath: string) {
-    return this._fileRetrievalFn(ipfsPath)
-      .then(LZString.decompressFromUint8Array)
-      .then(JSON.parse);
+    const self = this;
+    return new Promise<CheckpointInterface>(async function(resolve, reject) {
+      const timeout = setTimeout(function() {reject(new Error('Request timed out'));}, FILE_FETCH_TIMEOUT);
+      const fileResult = await self._fileRetrievalFn(ipfsPath);
+      clearTimeout(timeout);
+      const decompressedResult = await LZString.decompressFromUint8Array(fileResult);
+      resolve(JSON.parse(decompressedResult));
+    });
   }
 
   async getCheckpointFile(ipfsRootHash: string): Promise<CheckpointInterface> {
