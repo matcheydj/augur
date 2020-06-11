@@ -35,11 +35,11 @@ import {
 import { CreateMarketData } from 'modules/types';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
-import {
+import type {
   Events,
   TXEventName,
-  parseZeroXMakerAssetData,
-} from '@augurproject/sdk';
+} from '@augurproject/sdk-lite';
+import { parseZeroXMakerAssetData } from "@augurproject/utils";
 import {
   addPendingData,
   addUpdatePendingTransaction,
