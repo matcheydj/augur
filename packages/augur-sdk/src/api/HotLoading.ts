@@ -1,6 +1,6 @@
-import type { ExtraInfoTemplate } from '@augurproject/templates';
 import {
   Address,
+  ExtraInfoTemplate,
   MarketReportingStateByNum,
   MarketTypeName,
   SubscriptionEventName,

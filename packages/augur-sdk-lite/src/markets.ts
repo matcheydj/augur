@@ -1,4 +1,4 @@
-import { ExtraInfoTemplate } from '@augurproject/artifacts';
+import type { ExtraInfoTemplate } from './templates/types';
 import { MarketInfoOutcome } from './api/HotLoading';
 import { OrderBook } from './liquidity';
 import { Address, NumOutcomes } from './logs';

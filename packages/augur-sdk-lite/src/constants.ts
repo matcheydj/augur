@@ -202,6 +202,7 @@ export enum TemplateFilters {
   all = 'all',
   templateOnly = 'templateOnly',
   customOnly = 'customOnly',
+  sportsBook = 'sportsBook'
 }
 
 // Valid market liquidity spreads

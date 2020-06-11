@@ -1,4 +1,4 @@
-import { ExtraInfoTemplate } from '@augurproject/artifacts';
+import type { ExtraInfoTemplate } from './templates/types';
 import { MarketReportingState, MarketType, OrderEventType } from './constants';
 
 export type Address = string;
@@ -413,6 +413,9 @@ export interface MarketData extends Log {
   finalized: boolean;
   lastTradedTimestamp: UnixTimestamp;
   isWarpSync: boolean;
+  templateGroupHash?: string;
+  templateGroupType?: string;
+  templateGroupLine?: string;
 }
 
 export interface DisputeDoc extends Log {

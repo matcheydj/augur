@@ -11,14 +11,13 @@ import {
   ScalarMarketIcon,
   YesNoMarketIcon,
 } from 'modules/common/icons';
-  TimeOffset
-} from '@augurproject/templates';
 import {
   TEMPLATES,
   TEMPLATE_VALIDATIONS,
   RETIRED_TEMPLATES,
   getTemplateExchangeClosingWithBuffer,
   TemplateInputType,
+  TimeOffset
 } from '@augurproject/templates';
 import {
   REQUIRED,

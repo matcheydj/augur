@@ -2,6 +2,8 @@ import { ethers } from 'ethers';
 import { BigNumber } from 'ethers/utils';
 import moment from 'moment';
 import {
+  ExtraInfoTemplate,
+  ExtraInfoTemplateInput,
   REQUIRED,
   groupTypes,
   SECONDS_IN_A_DAY,
@@ -268,27 +270,6 @@ export enum TemplateInputType {
   DROPDOWN_QUESTION_DEP = 'DROPDOWN_QUESTION_DEP', // market question dropdown list of values is determined by other dropdown in market question.
 }
 
-export interface ExtraInfoTemplateInput {
-  id: number;
-  value: string;
-  timestamp?: string;
-  type: string;
-}
-
-export interface ExtraInfoTemplate {
-  hash: string;
-  question: string;
-  inputs: ExtraInfoTemplateInput[];
-}
-
-export interface ExtraInfo {
-  _scalarDenomination?: string;
-  longDescription?: string;
-  description?: string;
-  categories?: string[];
-  template?: ExtraInfoTemplate;
-}
-
 export const ValidationTemplateInputType = {
   [ValidationType.SOCIAL]: `[a-zA-Z0-9_]{1,15}`,
   [TemplateInputType.TEXT]: `(.*)`,
@@ -453,7 +434,7 @@ function daysRequiredAfterStartDate(
   const input = inputs.find(i => i.type === TemplateInputType.DATESTART);
   if (!input || !daysAfterStartDate) return true;
   // add number of hours to estimated start timestamp then compare to market event expiration
-  const secondsAfterStartDate = SECONDS_IN_A_DAY * daysAfterStartDate;
+  const secondsAfterStartDate = SECONDS_IN_A_DAY.toNumber() * daysAfterStartDate;
   return Number(input.timestamp) + secondsAfterStartDate >= Number(endTime);
 }
 

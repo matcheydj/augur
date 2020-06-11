@@ -20,10 +20,8 @@ import {
   convertDisplayValuetoAttoValue,
   numTicksToTickSize,
   convertAttoValueToDisplayValue,
-} from '@augurproject/sdk-lite';
-import type {
   TXEventName
-} from '@augurproject/sdk'
+} from '@augurproject/sdk-lite';
 import {
   BUY,
   SELL,

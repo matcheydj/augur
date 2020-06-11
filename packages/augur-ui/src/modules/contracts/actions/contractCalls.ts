@@ -12,6 +12,7 @@ import {
   formatRep,
   formatPercent,
 } from 'utils/format-number';
+import type { ExtraInfoTemplate } from '@augurproject/sdk-lite';
 import {
   PlaceTradeDisplayParams,
   SimulateTradeData,
@@ -43,7 +44,6 @@ import { TestNetReputationToken } from '@augurproject/core/build/libraries/Gener
 import { CreateMarketData, LiquidityOrder, FormattedNumber } from 'modules/types';
 import { formatBytes32String } from 'ethers/utils';
 import { constructMarketParams } from 'modules/create-market/helpers/construct-market-params';
-import type { ExtraInfoTemplate } from '@augurproject/templates';
 import { getFingerprint } from 'utils/get-fingerprint';
 
 export function isWeb3Transport(): boolean {

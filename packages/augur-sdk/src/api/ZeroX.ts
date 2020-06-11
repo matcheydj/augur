@@ -799,30 +799,18 @@ export class ZeroX {
     numOrders: number,
   ): TradeTransactionLimits {
     let loopLimit = new BigNumber(1);
-<<<<<<< HEAD
     let gasLimit = WORST_CASE_FILL[params.numOutcomes];
+    numOrders--;
     while (
       gasLimit
         .plus(WORST_CASE_FILL[params.numOutcomes])
         .lt(MAX_GAS_LIMIT_FOR_TRADE) &&
-      loopLimit.lt(MAX_FILLS_PER_TX)
-    ) {
-      loopLimit = loopLimit.plus(1);
-      gasLimit = gasLimit.plus(WORST_CASE_FILL[params.numOutcomes]);
-=======
-    let gasLimit = constants.WORST_CASE_FILL[params.numOutcomes];
-    numOrders--;
-    while (
-      gasLimit
-        .plus(constants.WORST_CASE_FILL[params.numOutcomes])
-        .lt(constants.MAX_GAS_LIMIT_FOR_TRADE) &&
-      loopLimit.lt(constants.MAX_FILLS_PER_TX) &&
+      loopLimit.lt(MAX_FILLS_PER_TX) &&
       numOrders > 0
     ) {
       loopLimit = loopLimit.plus(1);
-      gasLimit = gasLimit.plus(constants.WORST_CASE_FILL[params.numOutcomes]);
+      gasLimit = gasLimit.plus(WORST_CASE_FILL[params.numOutcomes]);
       numOrders--;
->>>>>>> pg/augur-templates-package
     }
     gasLimit = gasLimit.plus(TRADE_GAS_BUFFER);
     return {

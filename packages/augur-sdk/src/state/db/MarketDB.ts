@@ -1,9 +1,3 @@
-import { getGroupHashInfo, isTemplateMarket } from '@augurproject/artifacts';
-import { ParsedLog } from '@augurproject/types';
-import { BigNumber } from 'bignumber.js';
-import * as _ from 'lodash';
-import { OrderBook } from '../../api/Liquidity';
-import { Augur } from '../../Augur';
 import {
   CLAIM_GAS_COST,
   DEFAULT_GAS_PRICE_IN_GWEI,
@@ -11,19 +5,24 @@ import {
   INVALID_OUTCOME,
   MarketReportingState,
   MINIMUM_INVALID_ORDER_VALUE_IN_ATTO_DAI,
+  orderTypes,
   SECONDS_IN_A_DAY,
   SECONDS_IN_A_YEAR,
   SubscriptionEventName,
   WORST_CASE_FILL,
-} from '../../constants';
-import { NewBlock } from '../../events';
-import { padHex, QUINTILLION } from '../../utils';
-import {
+  NewBlock,
   MarketData,
   OrderTypeHex,
   TimestampSetLog,
   UnixTimestamp,
-} from '../logs/types';
+} from '@augurproject/sdk-lite';
+import { getGroupHashInfo, isTemplateMarket } from '@augurproject/templates';
+import { ParsedLog } from '@augurproject/types';
+import { BigNumber } from 'bignumber.js';
+import * as _ from 'lodash';
+import { OrderBook } from '../../api/Liquidity';
+import { Augur } from '../../Augur';
+import { padHex, QUINTILLION } from '../../utils';
 import { DB } from './DB';
 import { DerivedDB } from './DerivedDB';
 

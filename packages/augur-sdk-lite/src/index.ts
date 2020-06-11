@@ -5,4 +5,5 @@ export * from './markets';
 export { AugurLite } from './AugurLite';
 export * from './api/HotLoading';
 export * from './events';
-export * from './templateConstants';
+export * from './templates/constants';
+export * from './templates/types'
