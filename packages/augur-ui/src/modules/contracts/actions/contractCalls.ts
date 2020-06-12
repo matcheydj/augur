@@ -13,18 +13,20 @@ import {
   formatPercent,
 } from 'utils/format-number';
 import type { ExtraInfoTemplate } from '@augurproject/sdk-lite';
-import {
+import type {
   PlaceTradeDisplayParams,
   SimulateTradeData,
   CreateCategoricalMarketParams,
   CreateScalarMarketParams,
+  Getters
+} from "@augurproject/sdk";
+import {
   convertDisplayAmountToOnChainAmount,
   convertDisplayPriceToOnChainPrice,
-  Getters,
   numTicksToTickSizeWithDisplayPrices,
   calculatePayoutNumeratorsArray,
   convertDisplayValuetoAttoValue,
-} from '@augurproject/sdk';
+} from '@augurproject/utils';
 import { generateTradeGroupId } from 'utils/generate-trade-group-id';
 import { createBigNumber, BigNumber } from 'utils/create-big-number';
 import {
