@@ -1,4 +1,5 @@
 import type { Getters } from '@augurproject/sdk';
+import { isSameAddress } from 'utils/isSameAddress';
 import { AppState } from 'appStore';
 import { updateLoginAccount } from 'modules/account/actions/login-account';
 import { updateUserFilledOrders } from 'modules/markets/actions/market-trading-history-management';

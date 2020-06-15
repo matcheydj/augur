@@ -1,4 +1,4 @@
-import type { MAX_FILLS_PER_TX } from '@augurproject/sdk';
+import { MAX_FILLS_PER_TX } from '@augurproject/sdk-lite';
 import memoize from 'memoizee';
 import * as constants from 'modules/common/constants';
 import {

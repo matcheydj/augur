@@ -1,6 +1,7 @@
 let sdk = null;
 export let augurSdk = {
-  get: () => sdk?.get()
+  get: () => sdk?.get(),
+  subscribe: (dispatch) => sdk?.subscribe(dispatch)
 }
 
 export async function loadAugur() {

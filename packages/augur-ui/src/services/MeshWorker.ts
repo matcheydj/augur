@@ -1,5 +1,4 @@
 import * as Comlink from 'comlink';
-
 import './MeshTransferHandler';
 import 'localstorage-polyfill';
 import { retry } from 'async';
@@ -12,14 +11,12 @@ self.document = {
   createEvent: type => new CustomEvent(type),
 };
 
-const loadMesh = async () => {
-  const {
-    loadMeshStreamingWithURLAsync,
-    Mesh,
-  } = import(/* webpackChunkName: 'mesh-browser-lite' */ '@0x/mesh-browser-lite');
+const {
+  loadMeshStreamingWithURLAsync,
+  Mesh,
+} = require('@0x/mesh-browser-lite');
 
-  await loadMeshStreamingWithURLAsync('zerox.wasm');
-}
+const loadMesh = async () => loadMeshStreamingWithURLAsync('zerox.wasm');
 Comlink.expose({
   loadMesh: () =>
     new Promise((resolve, reject) =>

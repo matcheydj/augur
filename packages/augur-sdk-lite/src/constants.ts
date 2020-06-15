@@ -20,6 +20,17 @@ export const QUINTILLION = new BigNumber(10).pow(18);
 
 export const INIT_REPORTING_FEE_DIVISOR = '10000';
 
+export enum GetMarketsSortBy {
+  marketOI = 'marketOI',
+  liquidity = 'liquidity',
+  volume = 'volume',
+  timestamp = 'timestamp',
+  endTime = 'endTime',
+  lastTradedTimestamp = 'lastTradedTimestamp',
+  disputeRound = 'disputeRound',
+  totalRepStakedInMarket = 'totalRepStakedInMarket',
+}
+
 export enum MarketReportingStateByNum {
   'PreReporting',
   'DesignatedReporting',

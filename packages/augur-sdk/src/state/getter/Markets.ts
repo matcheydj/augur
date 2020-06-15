@@ -4,6 +4,7 @@ import {
   defaultReportingFeeDivisor,
   DisputeDoc,
   ExtraInfoTemplate,
+  GetMarketsSortBy,
   INIT_REPORTING_FEE_DIVISOR,
   MarketData,
   MarketInfo,
@@ -51,17 +52,6 @@ import {
 import { Getter } from './Router';
 import { sortOptions } from './types';
 import { flattenZeroXOrders } from './ZeroXOrdersGetters';
-
-export enum GetMarketsSortBy {
-  marketOI = 'marketOI',
-  liquidity = 'liquidity',
-  volume = 'volume',
-  timestamp = 'timestamp',
-  endTime = 'endTime',
-  lastTradedTimestamp = 'lastTradedTimestamp',
-  disputeRound = 'disputeRound',
-  totalRepStakedInMarket = 'totalRepStakedInMarket',
-}
 
 const MaxLiquiditySpreadValue = {
   '100': null,
