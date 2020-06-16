@@ -642,6 +642,7 @@ jobs:
           tagSource: 'gitTag'
           tag: '$(Build.SourceBranchName)'
           title: 'Augur $(Build.SourceBranchName)'
+          assets: '$(Build.ArtifactStagingDirectory)/*'
           releaseNotesSource: inline
           isDraft: true
           isPreRelease: true
