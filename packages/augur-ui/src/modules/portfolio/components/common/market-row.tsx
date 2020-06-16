@@ -1,4 +1,4 @@
-import type { TXEventName } from '@augurproject/sdk';
+import { TXEventName } from '@augurproject/sdk-lite';
 import classNames from 'classnames';
 import { SubmitTextButton } from 'modules/common/buttons';
 import { SCALAR, SIGN_SEND_ORDERS } from 'modules/common/constants';

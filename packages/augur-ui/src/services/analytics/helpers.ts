@@ -1,4 +1,4 @@
-import type { TXEventName } from '@augurproject/sdk';
+import { TXEventName } from '@augurproject/sdk-lite';
 import { AppState } from 'appStore';
 import { getInfo } from 'modules/alerts/actions/set-alert-text';
 import { BUY_INDEX, SELL_INDEX } from 'modules/common/constants';

@@ -1,4 +1,4 @@
-import type { TXEventName } from '@augurproject/sdk';
+import { TXEventName } from '@augurproject/sdk-lite';
 import {
   MIGRATE_FROM_LEG_REP_TOKEN,
   V1_REP_MIGRATE_ESTIMATE,

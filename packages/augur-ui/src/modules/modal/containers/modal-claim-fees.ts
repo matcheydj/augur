@@ -34,7 +34,7 @@ import { disavowMarket } from 'modules/contracts/actions/contractCalls';
 import { selectReportingWinningsByMarket } from 'modules/positions/selectors/select-reporting-winnings-by-market';
 import { displayGasInDai } from 'modules/app/actions/get-ethToDai-rate';
 import { TRANSACTIONS } from 'modules/routes/constants/views';
-import type { TXEventName } from '@augurproject/sdk';
+import { TXEventName } from '@augurproject/sdk-lite';
 import { addPendingData } from 'modules/pending-queue/actions/pending-queue-management';
 
 const mapStateToProps = (state: AppState) => {

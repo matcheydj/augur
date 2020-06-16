@@ -22,7 +22,7 @@ import { formatShares, formatDai, formatMarketShares } from "utils/format-number
 import Styles from "modules/modal/modal.styles.less";
 import OpenOrdersTable from "modules/market/components/market-orders-positions-table/open-orders-table";
 import { LiquidityOrder } from "modules/types";
-import type { TXEventName } from "@augurproject/sdk-lite";
+import { TXEventName } from "@augurproject/sdk-lite";
 import { DISMISSABLE_NOTICE_BUTTON_TYPES, DismissableNotice } from "modules/reporting/common";
 
 interface UnsignedOrdersProps {

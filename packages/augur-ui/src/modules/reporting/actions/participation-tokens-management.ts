@@ -1,4 +1,4 @@
-import type { TXEventName } from '@augurproject/sdk';
+import { TXEventName } from '@augurproject/sdk-lite';
 import { AppState } from 'appStore';
 import { BUYPARTICIPATIONTOKENS } from 'modules/common/constants';
 import {

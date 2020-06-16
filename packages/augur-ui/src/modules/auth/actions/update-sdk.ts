@@ -1,4 +1,4 @@
-import type { TXEventName } from '@augurproject/sdk';
+import { TXEventName } from '@augurproject/sdk-lite';
 import { AppState } from 'appStore';
 import { toChecksumAddress } from 'ethereumjs-util';
 import { updateLoginAccount } from 'modules/account/actions/login-account';

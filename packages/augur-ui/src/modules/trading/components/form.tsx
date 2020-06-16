@@ -24,6 +24,8 @@ import { MarketData, OutcomeFormatted } from 'modules/types';
 import type { Getters } from "@augurproject/sdk";
 import {
   convertDisplayAmountToOnChainAmount,
+} from '@augurproject/sdk-lite';
+import {
   tickSizeToNumTickWithDisplayPrices,
   getTradeInterval,
   QUINTILLION,
