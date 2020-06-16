@@ -30,6 +30,10 @@ export class SDK {
     return this.config?.networkId;
   }
 
+  connect() {
+    return this.connector.connect(this.config);
+  }
+
   async makeClient(
     provider: JsonRpcProvider,
     config: SDKConfiguration,
@@ -66,7 +70,6 @@ export class SDK {
       });
     }
 
-    await this.connector.connect(this.config);
     // tslint:disable-next-line:ban-ts-ignore
     // @ts-ignore
     window.AugurSDK = this.client;

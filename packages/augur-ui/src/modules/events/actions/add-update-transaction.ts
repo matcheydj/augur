@@ -35,7 +35,7 @@ import {
 import { CreateMarketData } from 'modules/types';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
-import type {
+import {
   Events,
   TXEventName,
 } from '@augurproject/sdk-lite';

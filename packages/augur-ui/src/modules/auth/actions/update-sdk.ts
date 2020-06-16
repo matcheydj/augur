@@ -35,12 +35,12 @@ export const updateSdk = (
   dispatch: ThunkDispatch<void, any, Action>,
 ) => {
   if (!loginAccount || !loginAccount.address || !loginAccount.meta) return;
-  if (!augurSdk.sdk) return;
+  if (!augurSdk.get()) return;
 
   let newAccount = { ...loginAccount };
 
   try {
-    dispatch(updateAppStatus(Ox_ENABLED, !!augurSdk.sdk.zeroX));
+    dispatch(updateAppStatus(Ox_ENABLED, !!augurSdk.get().zeroX));
     dispatch(updateAppStatus(GSN_ENABLED, useGSN));
     if (useGSN) {
       const hasWallet = await augurSdk.client.gsn.userHasInitializedWallet(newAccount.address);
