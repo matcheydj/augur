@@ -639,7 +639,7 @@ jobs:
           repository: 'AugurProject/$(Build.Repository.Name)'
           action: create
           target: '$(Build.SourceVersion)'
-          tagSource: 'gitTag'
+          tagSource: 'userSpecifiedTag'
           tag: '$(Build.SourceBranchName)'
           tagPattern: '.*'
           title: 'Augur $(Build.SourceBranchName)'
