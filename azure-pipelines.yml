@@ -632,19 +632,12 @@ jobs:
           #flattenFolders: false # Optional
           #preserveTimestamp: false # Optional
 
-      - bash: |
-          set -euo pipefail
-          ls "$STAGING_DIR_ROBERT"
-        env:
-          STAGING_DIR_ROBERT: $(Build.ArtifactStagingDirectory)
-        displayName: 'TEST TASK PLEASE IGNORE'
-
       - task: GitHubRelease@1
         displayName: 'GitHub release (create)'
         inputs:
           gitHubConnection: 'GitHub OAuth'
           repository: 'AugurProject/$(Build.Repository.Name)'
-          action: edit
+          action: create
           target: '$(Build.SourceVersion)'
           tagSource: 'gitTag'
           tag: '$(Build.SourceBranchName)'
