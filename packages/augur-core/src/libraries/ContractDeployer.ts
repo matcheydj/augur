@@ -38,7 +38,8 @@ import {
 import { Contracts, ContractData } from './Contracts';
 import { Dependencies } from './GenericContractInterfaces';
 import { NetworkId } from '@augurproject/utils';
-import { ContractAddresses, updateConfig, SDKConfiguration, mergeConfig } from '@augurproject/artifacts';
+import { ContractAddresses, SDKConfiguration, mergeConfig } from '@augurproject/utils';
+import { updateConfig } from "@augurproject/artifacts";
 import { TRADING_CONTRACTS, RELAY_HUB_SIGNED_DEPLOY_TX, RELAY_HUB_DEPLOYER_ADDRESS, RELAY_HUB_ADDRESS } from './constants';
 
 const NULL_ADDRESS = "0x0000000000000000000000000000000000000000";

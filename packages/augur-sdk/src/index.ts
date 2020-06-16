@@ -8,11 +8,13 @@ export * from './api/HotLoading';
 export * from './api/GSN';
 export * from './api/WarpSync';
 export * from '@augurproject/types';
-export { Provider } from './ethereum/Provider';
 export * from './utils';
 export * from './state';
 export * from './subscriptions';
 export { ContractEvents } from './api/ContractEvents';
+
+export { Provider } from './ethereum/Provider';
+export { EthersProvider } from '@augurproject/ethersjs-provider';
 
 import * as Connectors from './connector';
 import * as Events from './events';

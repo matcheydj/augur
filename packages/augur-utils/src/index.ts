@@ -46,3 +46,6 @@ export { chunkRange } from './generators';
 export { serialize } from './serialize';
 export * from './logger';
 export * from './repeat';
+export * from './configuration';
+
+

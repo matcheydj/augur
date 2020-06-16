@@ -1,4 +1,4 @@
-import { SDKConfiguration } from '@augurproject/artifacts';
+import { SDKConfiguration } from '@augurproject/utils';
 import { EthersSigner } from '@augurproject/contract-dependencies-ethers';
 import { EthersProvider } from '@augurproject/ethersjs-provider';
 import { SubscriptionEventName } from '@augurproject/sdk-lite';

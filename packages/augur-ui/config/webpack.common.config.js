@@ -5,7 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
-const { buildConfig, serializeConfig} = require('@augurproject/artifacts')
+const { buildConfig } = require('@augurproject/artifacts');
+const { serializeConfig } = require('@augurproject/utils');
 
 
 const PATHS = {

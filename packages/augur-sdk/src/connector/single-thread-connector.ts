@@ -1,4 +1,4 @@
-import { SDKConfiguration } from '@augurproject/artifacts';
+import { SDKConfiguration } from '@augurproject/utils';
 import { SubscriptionEventName } from '@augurproject/sdk-lite';
 import { Callback } from '../events';
 import { startServerFromClient } from '../state/create-api';

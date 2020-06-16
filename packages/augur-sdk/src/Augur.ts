@@ -1,4 +1,4 @@
-import type { SDKConfiguration } from '@augurproject/artifacts';
+import type { SDKConfiguration } from '@augurproject/utils';
 import { NetworkId } from '@augurproject/utils';
 import {
   EthersSigner,

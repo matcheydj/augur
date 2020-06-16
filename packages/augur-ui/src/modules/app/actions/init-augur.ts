@@ -1,6 +1,6 @@
 import type { SDKConfiguration } from '@augurproject/artifacts';
-import { isDevNetworkId } from "@augurproject/utils";
-import { augurSdk, loadAugur } from "services/augursdk";
+import { isDevNetworkId, mergeConfig } from "@augurproject/utils";
+import { augurSdk } from "services/augursdk";
 import { getNetworkId } from 'modules/contracts/actions/contractCalls';
 import isGlobalWeb3 from 'modules/auth/helpers/is-global-web3';
 import { updateEnv } from 'modules/app/actions/update-env';
@@ -45,6 +45,7 @@ import { tryToPersistStorage } from 'utils/storage-manager';
 import { getNetwork } from 'utils/get-network-name';
 import { showIndexedDbSize } from 'utils/show-indexed-db-size';
 import { isGoogleBot } from 'utils/is-google-bot';
+import { isMobileSafari } from 'utils/is-safari';
 
 const NETWORK_ID_POLL_INTERVAL_DURATION = 10000;
 
@@ -126,10 +127,6 @@ export function connectAugur(
     dispatch: ThunkDispatch<void, any, Action>,
     getState: () => AppState
   ) => {
-    const {
-      mergeConfig,
-      validConfigOrDie
-    } = await import(/* webpackChunkName: 'artifacts'*/'@augurproject/artifacts');
     const { modal, loginAccount } = getState();
     const windowApp = windowRef as WindowApp;
 
@@ -214,19 +211,25 @@ export function connectAugur(
 
     // Disable mesh/gsn for googleBot
     if (isGoogleBot()) {
-      config = validConfigOrDie(
-        mergeConfig(config, {
-          zeroX: { mesh: { enabled: false } },
-          gsn: { enabled: false },
-          useWarpSync: false,
-        })
-      );
+      config = mergeConfig(config, {
+        zeroX: { mesh: { enabled: false } },
+        gsn: { enabled: false },
+        useWarpSync: false,
+      })
+    }
+
+    if (isMobileSafari()) {
+      config = mergeConfig(config, {
+        warpSync: {
+          autoReport: false,
+          enabled: false,
+        },
+      })
     }
 
     let Augur = null;
-    let SDK = await loadAugur();
     try {
-      Augur = await SDK.makeClient(provider, config);
+      Augur = await augurSdk.makeClient(provider, config);
     } catch (e) {
       console.error(e);
       if (provider._network && config.networkId !== provider._network.chainId) {
@@ -273,8 +276,6 @@ export function connectAugur(
     // wire up start up events for sdk
     dispatch(listenForStartUpEvents(Augur));
     dispatch(updateCanHotload(true));
-
-    await SDK.connect();
 
     callback(null);
   };
