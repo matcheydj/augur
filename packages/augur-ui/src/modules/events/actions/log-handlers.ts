@@ -138,12 +138,12 @@ const MED_PRI_LOAD_REFRESH_MS = 2000;
 const loadOrderBook = _.throttle(
   (dispatch, marketId) => dispatch(loadMarketOrderBook(marketId)),
   HIGH_PRI_REFRESH_MS,
-  { leading: true }
+  { loading: true }
 );
 const loadUserOpenOrders = _.throttle(
   dispatch => dispatch(loadAccountOpenOrders()),
   MED_PRI_LOAD_REFRESH_MS,
-  { leading: true }
+  { loading: true }
 );
 const throttleLoadMarketOrders = marketId => dispatch =>
   loadOrderBook(dispatch, marketId);
