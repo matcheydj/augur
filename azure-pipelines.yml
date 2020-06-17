@@ -633,11 +633,11 @@ jobs:
           #preserveTimestamp: false # Optional
 
 
-      - task: GitHubRelease@0
+      - task: GitHubRelease@1
         displayName: 'GitHub release (create)'
         inputs:
           gitHubConnection: 'GitHub OAuth'
-          tagSource: 'manual'
+          tagSource: 'gitTag'
           tag: '$(Build.SourceBranchName)'
           title: 'Augur $(Build.SourceBranchName)'
           assets: '$(Build.ArtifactStagingDirectory)/*'
