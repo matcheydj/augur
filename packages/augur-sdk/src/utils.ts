@@ -1,100 +1,37 @@
 import {
+  marketTypeToName,
   CommonOutcomes,
   MarketData,
   MarketType,
   MarketTypeName,
   YesNoOutcomes,
 } from '@augurproject/sdk-lite';
+export {
+  marketTypeToName,
+  marketNameToType,
+  getTradeInterval
+} from '@augurproject/sdk-lite';
+
+import { convertAttoValueToDisplayValue } from "@augurproject/utils";
+export {
+  padHex,
+  ZERO,
+  ONE,
+  QUINTILLION,
+  numTicksToTickSize,
+  numTicksToTickSizeWithDisplayPrices,
+  tickSizeToNumTickWithDisplayPrices,
+  convertOnChainAmountToDisplayAmount,
+  convertDisplayAmountToOnChainAmount,
+  convertOnChainPriceToDisplayPrice,
+  convertDisplayPriceToOnChainPrice,
+  convertPayoutNumeratorsToStrings,
+  convertDisplayValuetoAttoValue,
+  convertAttoValueToDisplayValue
+} from "@augurproject/utils";
+
 import { BigNumber } from 'bignumber.js';
 import { OrderData, ZeroXOrders } from './state/db/ZeroXOrders';
-
-export const ZERO = new BigNumber(0);
-export const QUINTILLION = new BigNumber(10).pow(18);
-
-export function padHex(hexString: string): string {
-  return `0x${hexString.substr(2).padStart(64, '0')}`;
-}
-
-export function numTicksToTickSize(
-  numTicks: BigNumber,
-  minPrice: BigNumber,
-  maxPrice: BigNumber
-): BigNumber {
-  return maxPrice
-    .minus(minPrice)
-    .div(numTicks)
-    .dividedBy(QUINTILLION);
-}
-
-export function numTicksToTickSizeWithDisplayPrices(
-  numTicks: BigNumber,
-  minPrice: BigNumber,
-  maxPrice: BigNumber
-): BigNumber {
-  return maxPrice.minus(minPrice).div(numTicks);
-}
-
-export function tickSizeToNumTickWithDisplayPrices(
-  tickSize: BigNumber,
-  minPrice: BigNumber,
-  maxPrice: BigNumber
-): BigNumber {
-  return maxPrice.minus(minPrice).dividedBy(tickSize);
-}
-
-export function convertOnChainAmountToDisplayAmount(
-  onChainAmount: BigNumber,
-  tickSize: BigNumber
-) {
-  return onChainAmount.dividedBy(tickSize).dividedBy(QUINTILLION);
-}
-
-export function convertDisplayAmountToOnChainAmount(
-  displayAmount: BigNumber,
-  tickSize: BigNumber
-) {
-  return displayAmount.multipliedBy(tickSize).multipliedBy(QUINTILLION);
-}
-
-export function convertOnChainPriceToDisplayPrice(
-  onChainPrice: BigNumber,
-  minPrice: BigNumber,
-  tickSize: BigNumber
-) {
-  return onChainPrice
-    .multipliedBy(tickSize)
-    .plus(minPrice.dividedBy(QUINTILLION));
-}
-
-export function convertDisplayPriceToOnChainPrice(
-  displayPrice: BigNumber,
-  minPrice: BigNumber,
-  tickSize: BigNumber
-) {
-  return displayPrice.minus(minPrice).dividedBy(tickSize);
-}
-
-export function convertPayoutNumeratorsToStrings(
-  payoutNumeratorsBN: BigNumber[]
-): string[] {
-  const payoutNumerators: string[] = [];
-  for (let i = 0; i < payoutNumeratorsBN.length; i++) {
-    payoutNumerators[i] = payoutNumeratorsBN[i].toString(10);
-  }
-  return payoutNumerators;
-}
-
-export function convertDisplayValuetoAttoValue(
-  displayValue: BigNumber
-): BigNumber {
-  return displayValue.multipliedBy(QUINTILLION);
-}
-
-export function convertAttoValueToDisplayValue(
-  attoValue: BigNumber
-): BigNumber {
-  return attoValue.dividedBy(QUINTILLION);
-}
 
 export function compareObjects(key: string, order: string) {
   return function(a: any, b: any) {
@@ -361,55 +298,6 @@ export function describeMarketOutcome(
     default:
       throw Error(`Invalid market type: ${market.marketType}`);
   }
-}
-
-export function marketTypeToName(marketType: MarketType): MarketTypeName {
-  switch (marketType) {
-    case MarketType.YesNo:
-      return MarketTypeName.YesNo;
-    case MarketType.Categorical:
-      return MarketTypeName.Categorical;
-    case MarketType.Scalar:
-      return MarketTypeName.Scalar;
-    default:
-      throw Error(`Invalid market type "${marketType}"`);
-  }
-}
-
-export function marketNameToType(marketTypeName: MarketTypeName): MarketType {
-  switch (marketTypeName) {
-    case MarketTypeName.YesNo:
-      return MarketType.YesNo;
-    case MarketTypeName.Categorical:
-      return MarketType.Categorical;
-    case MarketTypeName.Scalar:
-      return MarketType.Scalar;
-    default:
-      throw Error(`Invalid market type "${marketTypeName}"`);
-  }
-}
-
-const TRADE_INTERVAL_VALUE = new BigNumber(10 ** 19);
-const MIN_TRADE_INTERVAL = new BigNumber(10 ** 14);
-
-export function getTradeInterval(
-  minPrice: BigNumber,
-  maxPrice: BigNumber,
-  numTicks: BigNumber
-): BigNumber {
-  const displayRange = new BigNumber(maxPrice).minus(minPrice);
-  let displayAmount = TRADE_INTERVAL_VALUE.multipliedBy(10 ** 18).div(
-    displayRange
-  );
-  let displayInterval = MIN_TRADE_INTERVAL;
-  while (displayInterval.lt(displayAmount)) {
-    displayInterval = displayInterval.multipliedBy(10);
-  }
-  displayAmount = displayInterval;
-  return displayInterval
-    .multipliedBy(displayRange)
-    .div(numTicks)
-    .div(10 ** 18);
 }
 
 export function parseZeroXMakerAssetData(makerAssetData: string): OrderData {

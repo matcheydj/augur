@@ -2,6 +2,12 @@ import { TransactionMetadata } from '@augurproject/contract-dependencies-ethers'
 import { BigNumber } from 'bignumber.js';
 import { utils as ethersUtils } from 'ethers';
 
+export {
+  ZERO,
+  ONE,
+  QUINTILLION,
+} from '@augurproject/utils';
+
 export const NULL_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 export const MALFORMED_OUTCOME = 'malformed outcome';
@@ -15,8 +21,6 @@ export const SECONDS_IN_A_DAY = new BigNumber(86400, 10);
 export const SECONDS_IN_A_YEAR = new BigNumber(SECONDS_IN_A_DAY).multipliedBy(
   365
 );
-
-export const QUINTILLION = new BigNumber(10).pow(18);
 
 export const INIT_REPORTING_FEE_DIVISOR = '10000';
 

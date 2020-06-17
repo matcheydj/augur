@@ -17,8 +17,10 @@ import {
 } from 'modules/contracts/actions/contractCalls';
 import type {
   Getters,
-  TXEventName,
 } from '@augurproject/sdk';
+import {
+  TXEventName
+} from '@augurproject/sdk-lite'
 import {
   convertDisplayAmountToOnChainAmount,
   convertDisplayPriceToOnChainPrice,

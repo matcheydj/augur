@@ -23,11 +23,11 @@ import convertExponentialToDecimal from 'utils/convert-exponential';
 import { MarketData, OutcomeFormatted } from 'modules/types';
 import type { Getters } from "@augurproject/sdk";
 import {
-  convertDisplayAmountToOnChainAmount,
+  getTradeInterval,
 } from '@augurproject/sdk-lite';
 import {
   tickSizeToNumTickWithDisplayPrices,
-  getTradeInterval,
+  convertDisplayAmountToOnChainAmount,
   QUINTILLION,
 } from '@augurproject/utils';
 import {

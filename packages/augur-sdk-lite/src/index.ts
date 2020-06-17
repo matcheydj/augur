@@ -1,4 +1,5 @@
 export * from './constants';
+export * from './utils';
 export * from './logs';
 export * from './liquidity';
 export * from './markets';

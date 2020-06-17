@@ -1,7 +1,9 @@
 import BigNumber from "bignumber.js";
 
-let ONE = new BigNumber(1, 10);
-let TWO = new BigNumber(2, 10);
+export const ZERO = new BigNumber(0);
+export const ONE = new BigNumber(1, 10);
+export const TWO = new BigNumber(2, 10);
+export const QUINTILLION = new BigNumber(10).pow(18);
 
 export const FXP_ONE = new BigNumber(10, 10).exponentiatedBy(18);
 export const BYTES_32 =  TWO.exponentiatedBy(252);
