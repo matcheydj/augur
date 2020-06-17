@@ -632,18 +632,32 @@ jobs:
           #flattenFolders: false # Optional
           #preserveTimestamp: false # Optional
 
-      - task: GitHubRelease@1
+
+      - task: GitHubRelease@0
         displayName: 'GitHub release (create)'
         inputs:
           gitHubConnection: 'GitHub OAuth'
-          repository: 'AugurProject/$(Build.Repository.Name)'
-          action: create
-          target: '$(Build.SourceVersion)'
-          tagSource: 'gitTag'
+          tagSource: 'userSpecifiedTag'
           tag: '$(Build.SourceBranchName)'
-          tagPattern: '.*'
           title: 'Augur $(Build.SourceBranchName)'
           assets: '$(Build.ArtifactStagingDirectory)/*'
           releaseNotesSource: inline
           isDraft: true
           isPreRelease: true
+
+
+#      - task: GitHubRelease@1
+#        displayName: 'GitHub release (create)'
+#        inputs:
+#          gitHubConnection: 'GitHub OAuth'
+#          repository: 'AugurProject/$(Build.Repository.Name)'
+#          action: create
+#          target: '$(Build.SourceVersion)'
+#          tagSource: 'gitTag'
+#          tag: '$(Build.SourceBranchName)'
+#          tagPattern: '.*'
+#          title: 'Augur $(Build.SourceBranchName)'
+#          assets: '$(Build.ArtifactStagingDirectory)/*'
+#          releaseNotesSource: inline
+#          isDraft: true
+#          isPreRelease: true
